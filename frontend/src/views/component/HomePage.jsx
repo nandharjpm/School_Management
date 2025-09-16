@@ -90,7 +90,7 @@ export default function HomePage() {
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 flex flex-col justify-center items-center p-10 ">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl italic font-extrabold mb-12 tracking-wide bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text drop-shadow-2xl text-center">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl italic font-extrabold mb-12 tracking-wide bg-gradient-to-r from-gray-800 via-white-500 to-blue-400 text-transparent bg-clip-text drop-shadow-2xl text-center">
               Achievements
             </h1>
 
