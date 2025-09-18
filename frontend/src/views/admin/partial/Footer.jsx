@@ -2,7 +2,7 @@ import '../../../css/header_style.css';
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-gradient-to-t from-grey-900 via-black to-gray-900 text-gray-300 py-12 mt-20">
+    <footer className="w-full bg-gradient-to-t from-gray-900 via-black to-gray-0 text-gray-300 py-12 mt-20">
       <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
         
         <div>
@@ -24,9 +24,9 @@ export default function Footer() {
 
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">Contact</h3>
-          <p className="text-sm text-gray-400">123 xyz Street, City, Country</p>
-          <p className="text-sm text-gray-400">+91 98765 43210</p>
-          <p className="text-sm text-gray-400">contact@premiumsite.com</p>
+          <p className="text-sm text-gray-400">NK International School, 123 NK Street, NK City, India</p>
+          <p className="text-sm text-gray-400">+91 6374012534</p>
+          <p className="text-sm text-gray-400">nk@school.com</p>
         </div>
       </div>
 
