@@ -1,24 +1,21 @@
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../admin/partial/Header";
+import Footer from "../admin/partial/Footer";
 
-export default function LoginPage() {
+export default function Login() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-gray-900 via-black to-gray-900">
-      {/* Header */}
       <Header />
 
-      {/* Main Login Section */}
       <div className="flex flex-1 items-center justify-center px-4">
-        <div className="w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-8 animate-fadeIn">
+        <div className="w-full max-w-md bg-white/10  border border-white/20 rounded-2xl shadow-2xl p-8">
           <h2 className="text-3xl font-bold text-center text-white mb-6">
             Welcome Back
           </h2>
-          <p className="text-gray-300 text-center mb-8">
+          <p className="bg-gradient-to-r from-gray-800 via-white-500 to-blue-400 text-transparent text-center mb-8">
             Please login to continue
           </p>
 
           <form className="space-y-6">
-            {/* Username */}
             <div>
               <label
                 htmlFor="username"
@@ -35,7 +32,6 @@ export default function LoginPage() {
               />
             </div>
 
-            {/* Password */}
             <div>
               <label
                 htmlFor="password"
@@ -52,7 +48,6 @@ export default function LoginPage() {
               />
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold shadow-lg hover:opacity-90 hover:scale-[1.02] transition transform"
@@ -61,7 +56,6 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Extra Links */}
           <div className="mt-6 flex justify-between text-sm text-gray-400">
             <a href="#" className="hover:text-indigo-400 transition">
               Forgot password?
@@ -73,7 +67,6 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

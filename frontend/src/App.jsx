@@ -1,8 +1,16 @@
 import HomePage from "./views/component/HomePage";
-export default function App(){
-    return(
-        <div>
-            <HomePage/>
-        </div>
-    );
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
+import Login from "./views/auth/Login";
+
+export default function App() {
+  return (
+    <div>
+      <BrowserRouter>
+        <HomePage />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
