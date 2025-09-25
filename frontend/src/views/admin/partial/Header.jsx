@@ -11,7 +11,7 @@ export default function Header() {
         <ul className="flex items-center w-full py-6">
           <div className="flex flex-row space-x-12 ms-auto">
             <li className="text-xl font-semibold tracking-wide text-gray-200 hover:text-white hover:scale-110 transition duration-300 ease-in-out cursor-pointer">
-              Home
+              <button onClick={()=>navigate("/")} className="cursor-pointer">Home</button>
             </li>
             <li className="text-xl font-semibold tracking-wide text-gray-200 hover:text-white hover:scale-110 transition duration-300 ease-in-out cursor-pointer">
               Program

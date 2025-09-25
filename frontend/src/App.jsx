@@ -6,9 +6,10 @@ export default function App() {
   return (
     <div>
       <BrowserRouter>
-        <HomePage />
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="*" element={ <h1>Page Not Found</h1>} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -6,16 +6,16 @@ export default function Login() {
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-gray-900 via-black to-gray-900">
       <Header />
 
-      <div className="flex flex-1 items-center justify-center px-4">
+      <div className="flex flex-1 items-center justify-center px-4 mt-40">
         <div className="w-full max-w-md bg-white/10  border border-white/20 rounded-2xl shadow-2xl p-8">
           <h2 className="text-3xl font-bold text-center text-white mb-6">
             Welcome Back
           </h2>
-          <p className="bg-gradient-to-r from-gray-800 via-white-500 to-blue-400 text-transparent text-center mb-8">
-            Please login to continue
+          <p className="bg-gradient-to-r from-gray-800 via-gray-100 to-gray-800 text-transparent text-center mb-8">
+            <span className="font-bold text-black">Please login to continue</span>
           </p>
 
-          <form className="space-y-6">
+          <form className="space-y-5" action={}>
             <div>
               <label
                 htmlFor="username"
@@ -28,7 +28,7 @@ export default function Login() {
                 name="user_name"
                 id="username"
                 placeholder="Enter your username"
-                className="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                className="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700 text-gray-200 focus:outline-none focus:ring-3 focus:ring-indigo-200 transition"
               />
             </div>
 
@@ -44,13 +44,13 @@ export default function Login() {
                 name="password"
                 id="password"
                 placeholder="Enter your password"
-                className="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                className="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700 text-gray-200 focus:outline-none focus:ring-3 focus:ring-indigo-200 transition"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold shadow-lg hover:opacity-90 hover:scale-[1.02] transition transform"
+              className="cursor-pointer w-full py-3 px-6 rounded-xl bg-gradient-to-r from-gray-800 via-gray-400 to-gray-800 text-white font-bold shadow-lg hover:opacity-90 hover:scale-[1.02]"
             >
               Sign In
             </button>
