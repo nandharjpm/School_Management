@@ -1,14 +1,28 @@
 import Header from "../admin/partial/Header";
 import Footer from "../admin/partial/Footer";
-import useForm from 'react-hook-form';
-import { use } from "react";
+import {useForm} from 'react-hook-form';
+import axios from "axios";
+import { useState } from "react";
 
 export default function Register() {
 
   const {register, handleSubmit} = useForm();
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const onSubmit = () => {
-    console.log("Form submitted");
+  const api_url = import.meta.env.VITE_API_URL;
+
+  const onSubmit = async(data) => {
+    try{
+      const result = await axios.post(`${api_url}/register`, data);
+      setSuccessMessage(result.data.message);
+      console.log(result);
+    }catch(err){
+      if(err.response){
+        setErrorMessage(err.response.data.message);
+      }else{
+        setErrorMessage("Registration failed. Please try again.");
+      }
+    }
   };
 
   return (

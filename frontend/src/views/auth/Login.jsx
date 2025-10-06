@@ -15,7 +15,7 @@ export default function Login() {
             <span className="font-bold text-black">Please login to continue</span>
           </p>
 
-          <form className="space-y-5" action={}>
+          <form className="space-y-5">
             <div>
               <label
                 htmlFor="username"
