@@ -3,6 +3,7 @@ import Footer from "../admin/partial/Footer";
 import {useForm} from 'react-hook-form';
 import axios from "axios";
 import { useState } from "react";
+import dd from "../../../Helpers/helper";
 
 export default function Register() {
 
@@ -49,7 +50,7 @@ export default function Register() {
               <input
                 type="text"
                 id="username"
-                placeholder="Enter your username"
+                placeholder="Enter your username" autoComplete="off"
                 className="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700 text-gray-200 focus:outline-none focus:ring-3 focus:ring-indigo-200 transition"
                 {...register('username',{'required': "Enter your username"})}
               />
@@ -66,7 +67,7 @@ export default function Register() {
                 type="password"
                 name="password"
                 id="password"
-                placeholder="Enter your password"
+                placeholder="Enter your password" autoComplete="off"
                 className="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700 text-gray-200 focus:outline-none focus:ring-3 focus:ring-indigo-200 transition"
                 {...register('password',{'required':"Enter Your Password"})}
               />

@@ -1,5 +1,7 @@
 import Header from "../admin/partial/Header";
 import Footer from "../admin/partial/Footer";
+import {Link} from "react-router-dom";
+import Register from "./Register";
 
 export default function Login() {
   return (
@@ -60,9 +62,8 @@ export default function Login() {
             <a href="#" className="hover:text-indigo-400 transition">
               Forgot password?
             </a>
-            <a href="#" className="hover:text-indigo-400 transition">
-              Create account
-            </a>
+
+            <Link to="/register" className="hover:text-indigo-400 transition">Create Acount</Link>
           </div>
         </div>
       </div>

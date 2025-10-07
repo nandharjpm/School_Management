@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import newUser from "../models/Register";
 import Register from "../../frontend/src/views/auth/Register";
+import dd from "../Helpers/helper.js";
 
 export const registerUser = async(req, res)=>{
     try{
