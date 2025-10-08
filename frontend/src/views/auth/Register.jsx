@@ -4,6 +4,8 @@ import {useForm} from 'react-hook-form';
 import axios from "axios";
 import { useState } from "react";
 import dd from "../../../Helpers/helper";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Register() {
 
@@ -11,12 +13,14 @@ export default function Register() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const api_url = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
 
   const onSubmit = async(data) => {
     try{
       const result = await axios.post(`${api_url}/register`, data);
-      setSuccessMessage(result.data.message);
-      console.log(result);
+      if(result.status === 201){
+        navigate('/Confirmation');
+      }
     }catch(err){
       if(err.response){
         setErrorMessage(err.response.data.message);
@@ -42,6 +46,22 @@ export default function Register() {
           <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-200 mb-2"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email" autoComplete="on"
+                className="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700 text-gray-200 focus:outline-none focus:ring-3 focus:ring-indigo-200 transition"
+                {...register('email',{'required': "Enter your email"})}
+              />
+            </div>
+
+            <div>
+              <label
                 htmlFor="username"
                 className="block text-sm font-medium text-gray-200 mb-2"
               >
@@ -50,7 +70,7 @@ export default function Register() {
               <input
                 type="text"
                 id="username"
-                placeholder="Enter your username" autoComplete="off"
+                placeholder="Enter your username" autoComplete="on"
                 className="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700 text-gray-200 focus:outline-none focus:ring-3 focus:ring-indigo-200 transition"
                 {...register('username',{'required': "Enter your username"})}
               />
@@ -67,7 +87,7 @@ export default function Register() {
                 type="password"
                 name="password"
                 id="password"
-                placeholder="Enter your password" autoComplete="off"
+                placeholder="Enter your password" autoComplete="on"
                 className="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700 text-gray-200 focus:outline-none focus:ring-3 focus:ring-indigo-200 transition"
                 {...register('password',{'required':"Enter Your Password"})}
               />
