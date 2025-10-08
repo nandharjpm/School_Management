@@ -10,6 +10,7 @@ export const emailVerification = async (req, res) => {
 
         const user = await registerUser.findOne({ verificationToken: token });
         if(!user){
+            req.flash('error', 'Invalid or expired token');
             return res.status(400).send({message:"Invalid or expired token"});
         }
 
@@ -17,9 +18,11 @@ export const emailVerification = async (req, res) => {
         user.verificationToken=undefined;
         await user.save();
 
+        req.flash('success', 'Email verified successfully. You can now log in.');
         return res.redirect(`${process.env.FRONTEND_URL}login`);
     }catch(err){
         console.log(err);
+        req.flash('error', 'Something went wrong. Please try again later.');
         res.status(500).json({message:"Something went wrong", error:err.message});
     }
 }

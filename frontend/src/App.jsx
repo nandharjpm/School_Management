@@ -3,11 +3,18 @@ import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import Login from "./views/auth/Login";
 import Register from "./views/auth/Register";
 import Confirmation from "./views/auth/Confirmation";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
     <div>
       <BrowserRouter>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          
+        />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />

@@ -8,22 +8,29 @@ const verificationToken = crypto.randomBytes(32).toString('hex');
 export const registerUser = async (req, res) => {
   try {
     console.log(req.body);
-    const { email, username, password, phone_number } = req.body;
 
+    const { email, username, password, phone_number } = req.body;
     if (!email || !username || !password || !phone_number) {
-      return res.status(400).json({ mesage: "Please Enter All Fields" });
+      req.flash('error', 'Please enter all fields');
+      return res.status(400).json({ message: "Please Enter All Fields" });
     }
+
     const existingEmail = await newUser.findOne({ email });
     if (existingEmail) {
-      return res.status(400).json({ message: "Email is alredy exist" });
+      req.flash('error', 'Email is already exist');
+      return res.status(400).json({ message: "Email is already exist" });
     }
+
     const existingUser = await newUser.findOne({ username });
     if (existingUser) {
-      return res.status(400).json({ message: "Username is alredy exist" });
+      req.flash('error', 'Username is already exist');
+      return res.status(400).json({ message: "Username is already exist" });
     }
-    const exitsingPhoneNum = await newUser.findOne({ phone_number });
-    if (exitsingPhoneNum) {
-      return res.status(400).json({ message: "Phone Number is alredy exist" });
+    
+    const existingPhoneNum = await newUser.findOne({ phone_number });
+    if (existingPhoneNum) {
+      req.flash('error', 'Phone Number is already exist');
+      return res.status(400).json({ message: "Phone Number is already exist" });
     }
 
     
