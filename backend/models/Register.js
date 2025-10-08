@@ -9,4 +9,4 @@ const userSchema = new mongoose.Schema({
 });
 
 const registerUser = mongoose.model("Register", userSchema);
-export default userSchema;
+export default registerUser;

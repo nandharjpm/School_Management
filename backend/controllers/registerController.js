@@ -1,17 +1,17 @@
 import bcrypt from "bcryptjs";
-import newUser from "../models/Register";
-import Register from "../../frontend/src/views/auth/Register";
-import dd from "../Helpers/helper.js";
+import newUser from "../models/Register.js";
+import Register from "../models/Register.js";
 
 export const registerUser = async(req, res)=>{
     try{
-        const {email, password, phone_number} = req.body;
+        console.log(req.body);
+        const {username, password, phone_number} = req.body;
 
-        if(!email || !password || !phone_number){
+        if(!username || !password || !phone_number){
             return res.status(400).json({mesage:"Please Enter All Fields"});
         }
 
-        const existingUser = await newUser.findOne({email});
+        const existingUser = await newUser.findOne({email: username});
         const exitsingPhoneNum = await newUser.findOne({phone_number});
 
         if(existingUser || exitsingPhoneNum){
@@ -21,7 +21,7 @@ export const registerUser = async(req, res)=>{
         const hashPassword = await bcrypt.hash(password, 10);
 
         const createUser = new Register({
-            email,
+           email: username,
             password:hashPassword,
             phone_number,
         });
@@ -29,7 +29,7 @@ export const registerUser = async(req, res)=>{
         await createUser.save();
         return res.status(201).json({message:"User Created Successfully"});
     }catch(err){
-        console.err(err);
-        return res.status(500).json({message:"Something went Wrong"});
+        console.error(err);
+        return res.status(500).json({message: err.message});
     }
 }
