@@ -1,9 +1,26 @@
 import Header from "../admin/partial/Header";
 import Footer from "../admin/partial/Footer";
 import {Link} from "react-router-dom";
-import Register from "./Register";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export default function Login() {
+
+  const {login, loginHandler, formState: {errors}} = useForm();
+
+  const api_url = import.meta.env.VITE_APP_URL;
+
+  const loginProcess = async(data) => {
+    try{
+      const result = await axios.post(`${api_url}/login`,data);
+      if(result){
+        
+      }
+    }catch(err){
+      toast.error('error', err.response.data.message);
+    }
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-gray-900 via-black to-gray-900">
       <Header />
@@ -17,7 +34,7 @@ export default function Login() {
             <span className="font-bold text-black">Please login to continue</span>
           </p>
 
-          <form className="space-y-5">
+          <form className="space-y-5" onSubmit={loginHandler(loginProcess)}>
             <div>
               <label
                 htmlFor="username"

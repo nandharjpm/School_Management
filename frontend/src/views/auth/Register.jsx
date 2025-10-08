@@ -16,14 +16,12 @@ export default function Register() {
   const onSubmit = async(data) => {
     try{
       const result = await axios.post(`${api_url}/register`, data);
-      
+
       if(result.status === 201){
         toast.success("Registration Completed Successfully!");
         navigate('/Confirmation');
       }
-    }catch(err){
-      console.log(err);
-      
+    }catch(err){      
       if(err){
         toast.error(err.response.data.message);
       }else{
