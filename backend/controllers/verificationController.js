@@ -1,4 +1,4 @@
-import registerUser from "../models/Register.js";
+import registerUser from "../models/Users.js";
 
 export const emailVerification = async (req, res) => {
     try{

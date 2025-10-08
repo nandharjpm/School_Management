@@ -2,8 +2,6 @@ import Header from "../admin/partial/Header";
 import Footer from "../admin/partial/Footer";
 import {useForm} from 'react-hook-form';
 import axios from "axios";
-import { useState } from "react";
-import dd from "../../../Helpers/helper";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -18,17 +16,18 @@ export default function Register() {
   const onSubmit = async(data) => {
     try{
       const result = await axios.post(`${api_url}/register`, data);
+      
       if(result.status === 201){
         toast.success("Registration Completed Successfully!");
         navigate('/Confirmation');
       }
     }catch(err){
-      if(err.response){
+      console.log(err);
+      
+      if(err){
         toast.error(err.response.data.message);
-        setErrorMessage(err.response.data.message);
       }else{
         toast.error("Registration failed. Please try again.");
-        setErrorMessage("Registration failed. Please try again.");
       }
     }
   };
@@ -101,20 +100,20 @@ export default function Register() {
 
             <div>
               <label
-                htmlFor="phone_number"
+                htmlFor="mobile"
                 className="block text-sm font-medium text-gray-200 mb-2"
               >
                 Phone Number
               </label>
               <input
                 type="text"
-                name="phone_number"
-                id="phone_number"
+                name="mobile"
+                id="mobile"
                 placeholder="Enter your phone number"
                 className="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700 text-gray-200 focus:outline-none focus:ring-3 focus:ring-indigo-200 transition"
-                {...register('phone_number',{'required':"Enter Your Phone Number"})}
+                {...register('mobile',{'required':"Enter Your Phone Number"})}
               />
-              {errors.phone_number && <p className="text-red-500 text-sm mt-1">{errors.phone_number.message}</p>}
+              {errors.mobile && <p className="text-red-500 text-sm mt-1">{errors.mobile.message}</p>}
             </div>
 
             <button

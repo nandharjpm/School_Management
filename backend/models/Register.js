@@ -10,6 +10,3 @@ const userSchema = new mongoose.Schema({
 },{
     timestamps:true
 });
-
-const registerUser = mongoose.model("Register", userSchema);
-export default registerUser;
