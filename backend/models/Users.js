@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema({
   trash: { type: String, enum: ["YES", "NO"], default: "NO", required: true },
   isVerified: { type: Boolean, default: false },
   verificationToken: { type: String },
+  isLogin: {type:Boolean, enum:[1,0], default:0, required:true}
 }, {
   timestamps: true,
 });
