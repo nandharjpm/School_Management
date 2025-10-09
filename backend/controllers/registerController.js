@@ -7,7 +7,6 @@ const verificationToken = crypto.randomBytes(32).toString('hex');
 
 export const registerUser = async (req, res) => {
   try {
-    console.log(req.body);
 
     const { email, username, password, mobile } = req.body;
     if (!email || !username || !password || !mobile) {
