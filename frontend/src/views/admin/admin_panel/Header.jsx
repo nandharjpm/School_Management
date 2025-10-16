@@ -1,0 +1,54 @@
+import "../../../css/header_style.css";
+import { useNavigate } from "react-router-dom";
+import { FaEnvelope, FaBell } from "react-icons/fa";
+import { useUser } from "../../../context/UserContext";
+
+export default function Header() {
+  const navigate = useNavigate();
+  const { user } = useUser();
+  
+
+  return (
+    <header className="w-full fixed top-0 z-50 bg-gray-900 backdrop-blur-lg shadow-lg">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between py-3">
+        
+        <div className="flex items-center space-x-2">
+          <img
+            src="/path-to-logo.png"
+            alt="Logo"
+            className="h-10 w-10 cursor-pointer"
+          />
+          <span className="text-xl font-bold text-white cursor-pointer">
+            NK School
+          </span>
+        </div>
+
+     
+
+        {/* Right: Icons + User */}
+        <div className="flex items-center space-x-6">
+          <div className="relative cursor-pointer">
+            <FaEnvelope className="text-white text-lg" />
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-1">
+              9
+            </span>
+          </div>
+          <div className="relative cursor-pointer">
+            <FaBell className="text-white text-lg" />
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-1">
+              5
+            </span>
+          </div>
+          <div className="flex items-center space-x-2 cursor-pointer">
+            <img
+              src="/path-to-avatar.jpg"
+              alt="User"
+              className="h-8 w-8 rounded-full"
+            />
+            <span className="text-white font-medium">{user ? user.username : "Guest"}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}

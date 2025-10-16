@@ -7,27 +7,30 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminDashboard from "./views/component/AdminDashboard";
 import ProtectedRouter from "./views/component/ProtectedRouter";
+import { UserProvider } from "./context/UserContext";
 
 export default function App() {
   return (
     <div>
       <BrowserRouter>
-        <ToastContainer position="top-right" autoClose={3000} />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/confirmation" element={<Confirmation />} />
-          <Route path="*" element={<h1>Page Not Found</h1>} />
-          <Route
-            path="/admindashboard"
-            element={
-              <ProtectedRouter>
-                <AdminDashboard />
-              </ProtectedRouter>
-            }
-          />
-        </Routes>
+        <UserProvider>
+          <ToastContainer position="top-right" autoClose={3000} />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/confirmation" element={<Confirmation />} />
+            <Route path="*" element={<h1>Page Not Found</h1>} />
+            <Route
+              path="/admindashboard"
+              element={
+                <ProtectedRouter>
+                  <AdminDashboard />
+                </ProtectedRouter>
+              }
+            />
+          </Routes>
+        </UserProvider>
       </BrowserRouter>
     </div>
   );

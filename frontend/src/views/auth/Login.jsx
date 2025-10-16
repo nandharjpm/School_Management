@@ -5,11 +5,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import axios from "axios";
+import { useUser } from "../../context/UserContext";
 
 export default function Login() {
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { setUser } = useUser();
   
   const {register, handleSubmit, formState: {errors}} = useForm();
   
@@ -20,11 +22,11 @@ export default function Login() {
   const loginProcess = async(data) => {
     try{
       const result = await api.post("/login", data);
-      console.log("result is : ", result);
       
       if(result.status == 200){
         localStorage.setItem("token", result.data.token);
         toast.success('Login Successfully');
+        setUser(result.data.user);
         navigate("/admindashboard");
       }
     }catch(err){
