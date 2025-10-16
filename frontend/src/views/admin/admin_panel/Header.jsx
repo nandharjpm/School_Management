@@ -1,12 +1,30 @@
 import "../../../css/header_style.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useNavigate } from "react-router-dom";
 import { FaEnvelope, FaBell } from "react-icons/fa";
 import { useUser } from "../../../context/UserContext";
+import { useEffect, useRef, useState } from "react";
 
 export default function Header() {
-  const navigate = useNavigate();
   const { user } = useUser();
+  const [drodownOpen, setdropdownOpen] = useState(false);
+  const dropdownRef = useRef(nill);
+  const {useNavigate} = useNavigate();
+
+  useEffect(()=>{
+    const handleClickOutSide = (event) => {
+      if(dropdownRef.current && !dropdownRef.current.contains(event)){
+        setdropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutSide);
+    return () => document.removeEventListener("mousedown", handleClickOutSide);
+  },[]);
   
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    useNavigate("/login")
+  }
 
   return (
     <header className="w-full fixed top-0 z-50 bg-gray-900 backdrop-blur-lg shadow-lg">
@@ -16,7 +34,7 @@ export default function Header() {
           <img
             src="/path-to-logo.png"
             alt="Logo"
-            className="h-10 w-10 cursor-pointer"
+            className="h-10 w-10 cursor-pointer" id="profiledrop_down"
           />
           <span className="text-xl font-bold text-white cursor-pointer">
             NK School
@@ -25,7 +43,6 @@ export default function Header() {
 
      
 
-        {/* Right: Icons + User */}
         <div className="flex items-center space-x-6">
           <div className="relative cursor-pointer">
             <FaEnvelope className="text-white text-lg" />

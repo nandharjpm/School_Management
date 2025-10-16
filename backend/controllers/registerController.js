@@ -31,7 +31,6 @@ export const registerUser = async (req, res) => {
       req.flash('error', 'Phone Number is already exist');
       return res.status(400).json({ message: "Phone Number is already exist" });
     }
-    console.log(req.body);
 
     
     const hashPassword = await bcrypt.hash(password, 10);
