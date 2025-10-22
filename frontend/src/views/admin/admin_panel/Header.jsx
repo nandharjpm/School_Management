@@ -64,7 +64,7 @@ export default function Header() {
                 {user ? user.username : "Guest"}
               </span>
             </div>
-
+    
             {dropdownOpen && (
               <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg py-2 z-50">
                 <button
