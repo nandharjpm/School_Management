@@ -1,0 +1,36 @@
+.left-menu {
+  background-color: #ffffff !important;
+  color: #fff !important;
+}
+
+.left-menu .ps-menu-button:hover {
+  background-color: #1f2937 !important; 
+  color: #00bcd4 !important; 
+}
+
+
+.left-menu .ps-active {
+  background-color: #535861 !important;
+  color: #fff !important;
+}
+
+
+.left-menu .ps-submenu-content {
+  background-color: #000000 !important; 
+}
+
+
+.left-menu .ps-submenu-content .ps-menu-button:hover {
+  background-color: #374151 !important;
+  color: #00bcd4 !important;
+}
+
+
+.left-menu svg {
+  color: #fff8f8 !important; 
+}
+
+.left-menu .ps-menu-button:hover svg,
+.left-menu .ps-active svg {
+  color: #00bcd4 !important; 
+}

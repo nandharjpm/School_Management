@@ -8,6 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 import AdminDashboard from "./views/component/AdminDashboard";
 import ProtectedRouter from "./views/component/ProtectedRouter";
 import { UserProvider } from "./context/UserContext";
+import LeftMenu from "./views/admin/admin_panel/LeftMenu";
+import College from "./views/component/College";
+
 
 export default function App() {
   return (
@@ -26,9 +29,11 @@ export default function App() {
               element={
                 <ProtectedRouter>
                   <AdminDashboard />
+                  <LeftMenu />
                 </ProtectedRouter>
               }
             />
+            <Route path="/college" element={<College/>}/>
           </Routes>
         </UserProvider>
       </BrowserRouter>
