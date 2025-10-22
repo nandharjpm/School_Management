@@ -9,8 +9,8 @@ import AdminDashboard from "./views/component/AdminDashboard";
 import ProtectedRouter from "./views/component/ProtectedRouter";
 import { UserProvider } from "./context/UserContext";
 import LeftMenu from "./views/admin/admin_panel/LeftMenu";
-import College from "./views/component/College";
-
+import College_list from "./views/component/master/college/College_list";
+import College_add from "./views/component/master/college/College_add"
 
 export default function App() {
   return (
@@ -33,7 +33,10 @@ export default function App() {
                 </ProtectedRouter>
               }
             />
-            <Route path="/college" element={<College/>}/>
+             <Route path='college'>
+                <Route path='list' element={<College_list />}></Route>
+                <Route path='add' element={<College_add />}></Route>
+              </Route>
           </Routes>
         </UserProvider>
       </BrowserRouter>
