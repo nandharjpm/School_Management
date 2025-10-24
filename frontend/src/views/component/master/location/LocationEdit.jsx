@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../../admin/admin_panel/Header";
 import LeftMenu from "../../../admin/admin_panel/LeftMenu";
 import { useForm } from "react-hook-form";
@@ -6,23 +6,44 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Backbutton from "../../../../utils/components/Backbutton";
-import Submitbutton from "../../../../utils/components/Submitbutton";
+import { useParams } from "react-router-dom";
+import Updatebutton from "../../../../utils/components/Updatebutton";
+import { useEffect } from "react";
+
 
 export default function Location_add() {
   const { register, handleSubmit, formState: { errors }} = useForm();
+  const {id} = useParams();
 
   const navigate = useNavigate();
+  const [editData, setEditData] = useState([]);
 
   const api = import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
+  const fetchLocation = async () => {
+      try {
+        const response = await axios.get(`${api}/edit-location/${id}`);
+        const data = response.data.editLocation;
+        setEditData(data);
+        
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchLocation();
+  }, [id, api]);
+
+
   const onSubmit = async(data) => {
     try{
-        const result = await axios.post(`${api}/location-submit`, data);
+        const result = await axios.post(`${api}/location-editSubmit`, data);
         if(result.status == 201){
-          toast.success('Location is Created');
+          toast.success('Location is Updated');
           navigate("/location/list"); 
         }
     }catch(err){
-        console.log(err);
+        console.error(err);
     }
   }
 
@@ -44,7 +65,7 @@ export default function Location_add() {
             <Backbutton onClick={()=>navigate('/location/list')}/>
         </div>
         <p className="text-center text-2xl" style={{backgroundColor: "#cfcfcfff",padding: "8px",marginBottom: "8px",borderRadius: "5px"}}>
-          Location Add
+          Location Edit
         </p>
         <form onSubmit={handleSubmit(onSubmit)} style={{marginTop:"30px"}}>
           <label
@@ -61,10 +82,10 @@ export default function Location_add() {
             style={{ border: "1px solid rgba(255,255,255,0.2)", width: "60%", padding: "12px 15px", borderRadius: "12px", fontSize: "16px", outline: "none", background: "rgba(255,255,255,0.1)", color: "#000000ff", boxShadow: "0 4px 15px rgba(0,0,0,0.3)", transition: "all 0.3s ease"}}
             onFocus={(e) => (e.target.style.border = "1px solid rgba(0,255,255,0.6)")}
             onBlur={(e) => (e.target.style.border = "1px solid rgba(255,255,255,0.2)")}
-          />
+          />{editData}
           {errors.location && (<p style={{color:"red", position:"absolute", marginTop:"5px"}}>{errors.location.message}</p>)}
 
-          <Submitbutton />
+          <Updatebutton />
         </form>
       </div>
     </div>

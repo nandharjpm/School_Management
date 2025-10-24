@@ -47,6 +47,19 @@ const getLocationView = async(req, res) => {
 }
 
 
+const getLocationEdit = async(req,res) => {
+    try{
+        const editLocation = await Location.findById(req.params.id);
+        if(!editLocation){
+            res.status(404).json({message:"No Location were Found"});
+        }
+        res.status(200).json({editLocation});
+    }catch(err){
+        res.status(500).json({message:err.message});
+    }
+}
+
+
 export const locationMasterController = {
-    storeLocation,getLocation, getLocationView
+    storeLocation,getLocation, getLocationView, getLocationEdit,
 }

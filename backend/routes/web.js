@@ -14,5 +14,6 @@ router.post('/login', authenticationController);
 router.post('/location-submit', locationMasterController.storeLocation);
 router.get('/location', locationMasterController.getLocation);
 router.get('/get-location/:id', locationMasterController.getLocationView)
+router.get('/edit-location/:id', locationMasterController.getLocationEdit)
 
 export default router;

@@ -12,6 +12,7 @@ import LeftMenu from "./views/admin/admin_panel/LeftMenu";
 import Location_list from "./views/component/master/location/Location_list";
 import Location_add from "./views/component/master/location/Location_add";
 import LocationView from "./views/component/master/location/LocationView";
+import LocationEdit from "./views/component/master/location/LocationEdit";
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
               <Route path="list" element={<Location_list />} />
               <Route path="add" element={<Location_add />} />
               <Route path="view/:id" element={<LocationView />}/>
+              <Route path="edit/:id" element={<LocationEdit />}/>
             </Route>
           </Routes>
         </UserProvider>
