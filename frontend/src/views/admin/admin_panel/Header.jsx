@@ -28,12 +28,13 @@ export default function Header() {
   return (
     <header className="w-full fixed top-0 z-50 bg-gray-900 backdrop-blur-lg shadow-lg">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between py-3">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 ">
           <img
-            src="../../../img/home_page/high_school.png"
+            src="/src/img/home_page/high_school.png"
             alt="Logo"
             className="h-10 w-10 cursor-pointer"
             onClick={() => navigate("/")}
+            style={{borderRadius:"15px"}}
           />
           <span className="text-xl font-bold text-white cursor-pointer">
             NK College
@@ -41,12 +42,6 @@ export default function Header() {
         </div>
 
         <div className="flex items-center space-x-6">
-          <div className="relative cursor-pointer">
-            <FaEnvelope className="text-white text-lg" />
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-1">
-              9
-            </span>
-          </div>
           <div className="relative cursor-pointer">
             <FaBell className="text-white text-lg" />
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-1">
@@ -59,7 +54,7 @@ export default function Header() {
               className="flex items-center space-x-2 cursor-pointer"
               onClick={() => setDropdownOpen((prev) => !prev)}
             >
-              <img src="../../../img/home_page/high_school.png" alt="User" className="h-8 w-8 rounded-full" />
+              <img src="/src/img/home_page/high_school2.png" alt="User" className="h-8 w-8 rounded-full" />
               <span className="text-white font-medium">
                 {user ? user.username : "Guest"}
               </span>
