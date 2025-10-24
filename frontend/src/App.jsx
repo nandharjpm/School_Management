@@ -1,5 +1,11 @@
 import HomePage from "./views/component/HomePage";
-import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 import Login from "./views/auth/Login";
 import Register from "./views/auth/Register";
 import Confirmation from "./views/auth/Confirmation";
@@ -9,8 +15,8 @@ import AdminDashboard from "./views/component/AdminDashboard";
 import ProtectedRouter from "./views/component/ProtectedRouter";
 import { UserProvider } from "./context/UserContext";
 import LeftMenu from "./views/admin/admin_panel/LeftMenu";
-import College_list from "./views/component/master/college/College_list";
-import College_add from "./views/component/master/college/College_add"
+import Location_list from "./views/component/master/location/Location_list";
+import Location_add from "./views/component/master/location/Location_add";
 
 export default function App() {
   return (
@@ -33,10 +39,11 @@ export default function App() {
                 </ProtectedRouter>
               }
             />
-             <Route path='college'>
-                <Route path='list' element={<College_list />}></Route>
-                <Route path='add' element={<College_add />}></Route>
-              </Route>
+            <Route path="location" element={<Outlet />}>
+              <Route index element={<Navigate to="list" replace />} />
+              <Route path="list" element={<Location_list />} />
+              <Route path="add" element={<Location_add />} />
+            </Route>
           </Routes>
         </UserProvider>
       </BrowserRouter>

@@ -30,13 +30,13 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between py-3">
         <div className="flex items-center space-x-2">
           <img
-            src=""
+            src="../../../img/home_page/high_school.png"
             alt="Logo"
             className="h-10 w-10 cursor-pointer"
             onClick={() => navigate("/")}
           />
           <span className="text-xl font-bold text-white cursor-pointer">
-            NK School
+            NK College
           </span>
         </div>
 
@@ -59,7 +59,7 @@ export default function Header() {
               className="flex items-center space-x-2 cursor-pointer"
               onClick={() => setDropdownOpen((prev) => !prev)}
             >
-              <img src="" alt="User" className="h-8 w-8 rounded-full" />
+              <img src="../../../img/home_page/high_school.png" alt="User" className="h-8 w-8 rounded-full" />
               <span className="text-white font-medium">
                 {user ? user.username : "Guest"}
               </span>
