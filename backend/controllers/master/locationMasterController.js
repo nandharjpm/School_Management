@@ -33,7 +33,20 @@ const getLocation = async(req, res)=>{
     }
 }
 
+const getLocationView = async(req, res) => {
+    try{
+        const locationView = await Location.findById(req.params.id);
+        if(!locationView){
+            res.status(400).json({message:"Location Not Found"});
+        }
+        res.status(200).json({locationView});
+
+    }catch(err){
+        res.status(500).json({message:err.message});
+    }
+}
+
 
 export const locationMasterController = {
-    storeLocation,getLocation
+    storeLocation,getLocation, getLocationView
 }

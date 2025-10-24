@@ -5,13 +5,10 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Backbutton from "../../../../utils/components/Backbutton";
 
 export default function Location_add() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, formState: { errors }} = useForm();
 
   const navigate = useNavigate();
 
@@ -42,10 +39,16 @@ export default function Location_add() {
       <div
         style={{ marginTop: 120, marginLeft: 100, boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)", padding: 40, width: "70%", height: "90%", borderRadius: "20px"}}
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <div style={{display:"flex", justifyContent:"flex-start", marginBottom:"5px"}}>
+            <Backbutton onClick={()=>navigate('/location/list')}/>
+        </div>
+        <p className="text-center text-2xl" style={{backgroundColor: "#cfcfcfff",padding: "8px",marginBottom: "8px",borderRadius: "5px"}}>
+          Location Add
+        </p>
+        <form onSubmit={handleSubmit(onSubmit)} style={{marginTop:"30px"}}>
           <label
             htmlFor="location"
-            style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000000ff"}}
+            style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000000ff", marginBottom:"10px"}}
           >
             Location Name
           </label>

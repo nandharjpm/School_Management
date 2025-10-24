@@ -4,6 +4,8 @@ import LeftMenu from "../../../admin/admin_panel/LeftMenu";
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Addbutton from "../../../../utils/components/Addbutton";
+import {FaEdit, FaEye, FaTrash} from "react-icons/fa";
 
 export default function Location_list() {
   const [location, setLocation] = useState([]);
@@ -22,7 +24,47 @@ export default function Location_list() {
 
   const columns = [
     {name: "S.NO",selector: (row, index) => (index + 1),sortable: true,},
-    { name: "Location", selector: (row) => row.location, sortable: true },
+    {name: "Location", selector: (row) => row.location, sortable: true },
+    {name:"Action",
+      cell:(row)=>(
+        <div style={{display:"flex", gap:"15px"}}>
+          <FaEye
+            title="View"
+            onClick={()=>navigate(`/location/view/${row._id}`)}
+            style={{
+              cursor:"pointer",
+              color:"#003cffff",
+              fontSize:"22px",
+            }}
+            onMouseEnter={(e)=>(e.target.style.color="#000000ff")}
+            onMouseLeave={(e)=>(e.target.style.color="#003cffff")}
+          />
+          <FaEdit 
+            title="Edit"
+            onClick={()=>navigate(`/location/edit/${row._id}`)}
+            style={{
+              color:"#006d0fff",
+              fontSize:"20px",
+              cursor:"pointer",
+            }}
+            onMouseEnter={(e)=>(e.target.style.color="#000000ff")}
+            onMouseLeave={(e)=>(e.target.style.color="#006d0fff")}
+          />
+          <FaTrash 
+            title="Delete"
+            onClick={()=>navigate(`/location/delete/${row._id}`)}
+            style={{
+              color:"#ff0000ff",
+              fontSize:"18px",
+              cursor:"pointer"
+            }}
+            onMouseEnter={(e)=>(e.target.style.color="#000000ff")}
+            onMouseLeave={(e)=>(e.target.style.color="#ff0000ff")}
+          />
+
+        </div>
+      ),
+    }
   ];
 
   const customStyles = {
@@ -47,33 +89,10 @@ export default function Location_list() {
       style={{ display: "flex", fontFamily: "'Poppins', sans-serif", color: "#fff"}}>
       <Header />
       <LeftMenu />
-      <div style={{ marginTop: 120, marginLeft: 70, width: "75%", padding: 40, borderRadius: "20px", background: "rgba(243, 243, 243, 0.25)", boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)"}}>
+      <div style={{ marginTop: 120, height:"20%", marginLeft: 70, width: "75%", padding: 40, borderRadius: "20px", background: "rgba(243, 243, 243, 0.25)", boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)"}}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px"}}>
           <h2 style={{ color: "#000000ff", fontWeight: 600 }}>Location Details</h2>
-          <button
-            onClick={() => navigate("/location/add")}
-            style={{
-              width: "15%",
-              background: "#5f5f5fff",
-              color: "#fff",
-              fontWeight: "600",
-              cursor: "pointer",
-              borderRadius: "12px",
-              padding: "12px",
-              letterSpacing: "1px",
-              transition: "all 0.5s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.boxShadow = "#00e1ffff";
-              e.target.style.transform = "scale(1.05)";
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.boxShadow = "#fff";
-              e.target.style.transform = "scale(1)";
-            }}
-          >
-            Add Location
-          </button>
+          <Addbutton onClick={()=>navigate("/location/add")}/>
         </div>
 
         <DataTable

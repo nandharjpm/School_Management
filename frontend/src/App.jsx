@@ -1,11 +1,5 @@
 import HomePage from "./views/component/HomePage";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  Outlet,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Outlet} from "react-router-dom";
 import Login from "./views/auth/Login";
 import Register from "./views/auth/Register";
 import Confirmation from "./views/auth/Confirmation";
@@ -17,6 +11,7 @@ import { UserProvider } from "./context/UserContext";
 import LeftMenu from "./views/admin/admin_panel/LeftMenu";
 import Location_list from "./views/component/master/location/Location_list";
 import Location_add from "./views/component/master/location/Location_add";
+import LocationView from "./views/component/master/location/LocationView";
 
 export default function App() {
   return (
@@ -43,6 +38,7 @@ export default function App() {
               <Route index element={<Navigate to="list" replace />} />
               <Route path="list" element={<Location_list />} />
               <Route path="add" element={<Location_add />} />
+              <Route path="view/:id" element={<LocationView />}/>
             </Route>
           </Routes>
         </UserProvider>
