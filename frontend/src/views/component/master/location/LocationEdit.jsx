@@ -11,8 +11,8 @@ import Updatebutton from "../../../../utils/components/Updatebutton";
 import { useEffect } from "react";
 
 
-export default function Location_add() {
-  const { register, handleSubmit, formState: { errors }} = useForm();
+export default function LocationEdit() {
+  const { register, handleSubmit, formState: { errors }, setValue} = useForm();
   const {id} = useParams();
 
   const navigate = useNavigate();
@@ -25,19 +25,20 @@ export default function Location_add() {
       try {
         const response = await axios.get(`${api}/edit-location/${id}`);
         const data = response.data.editLocation;
-        setEditData(data);
+        setEditData(data.location);
+        setValue("location",data.location);
         
       } catch (err) {
         console.error(err);
       }
     };
     fetchLocation();
-  }, [id, api]);
+  }, [id, setValue]);
 
 
   const onSubmit = async(data) => {
     try{
-        const result = await axios.post(`${api}/location-editSubmit`, data);
+        const result = await axios.post(`${api}/location-editSubmit`,{id, location: data.location});
         if(result.status == 201){
           toast.success('Location is Updated');
           navigate("/location/list"); 
@@ -48,19 +49,10 @@ export default function Location_add() {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        minHeight: "100vh",
-        fontFamily: "'Poppins', sans-serif",
-        color: "#fff",
-      }}
-    >
+    <div style={{display: "flex",minHeight: "100vh",fontFamily: "'Poppins', sans-serif",color: "#fff"}}>
       <Header />
       <LeftMenu />
-      <div
-        style={{ marginTop: 120, marginLeft: 100, boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)", padding: 40, width: "70%", height: "90%", borderRadius: "20px"}}
-      >
+      <div style={{ marginTop: 120, marginLeft: 100, boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)", padding: 40, width: "70%", height: "90%", borderRadius: "20px"}} >
         <div style={{display:"flex", justifyContent:"flex-start", marginBottom:"5px"}}>
             <Backbutton onClick={()=>navigate('/location/list')}/>
         </div>
@@ -77,12 +69,13 @@ export default function Location_add() {
 
           <input
             type="text"
-            id="location"
+            id={id}
+            defaultValue={editData}
             {...register("location", {required: "Location Name is Required"})}
             style={{ border: "1px solid rgba(255,255,255,0.2)", width: "60%", padding: "12px 15px", borderRadius: "12px", fontSize: "16px", outline: "none", background: "rgba(255,255,255,0.1)", color: "#000000ff", boxShadow: "0 4px 15px rgba(0,0,0,0.3)", transition: "all 0.3s ease"}}
             onFocus={(e) => (e.target.style.border = "1px solid rgba(0,255,255,0.6)")}
             onBlur={(e) => (e.target.style.border = "1px solid rgba(255,255,255,0.2)")}
-          />{editData}
+          />
           {errors.location && (<p style={{color:"red", position:"absolute", marginTop:"5px"}}>{errors.location.message}</p>)}
 
           <Updatebutton />
