@@ -16,6 +16,7 @@ router.get('/location', locationMasterController.getLocation);
 router.get('/get-location/:id', locationMasterController.getLocationView)
 router.get('/edit-location/:id', locationMasterController.getLocationEdit)
 router.post('/location-editSubmit', locationMasterController.UpdateLocation)
+router.post('/delete-location/:id', locationMasterController.DeleteLocation);
 
 
 export default router;

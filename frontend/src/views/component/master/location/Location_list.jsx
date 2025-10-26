@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Addbutton from "../../../../utils/components/Addbutton";
 import {FaEdit, FaEye, FaTrash} from "react-icons/fa";
+import Swal from "sweetalert2";
 
 export default function Location_list() {
   const [location, setLocation] = useState([]);
@@ -21,6 +22,24 @@ export default function Location_list() {
     const data = res.data.locationData;
     setLocation(data);
   };
+
+  const deleteLoc = async(id)=>{
+    const result = await Swal.fire({
+      title:"Are You Sure",
+      text:"You Want Delete Location",
+      icon:"warning",
+      showCancelButton:true,
+      confirmButtonColor:"#0d43d8ff",
+      cancelButtonColor:"#ec0505ff",
+      confirmButtonText:"Yes Delete it"
+    });
+    if(result.isConfirmed){
+      await axios.post(`${api}/delete-location/${id}`);
+      Swal.fire("Deleted", "Location has been Deleted", "success");
+      fetchLocationList();
+    }
+
+  }
 
   const columns = [
     {name: "S.NO",selector: (row, index) => (index + 1),sortable: true,},
@@ -52,7 +71,7 @@ export default function Location_list() {
           />
           <FaTrash 
             title="Delete"
-            onClick={()=>navigate(`/location/delete/${row._id}`)}
+            onClick={()=> deleteLoc(row._id)}
             style={{
               color:"#ff0000ff",
               fontSize:"18px",

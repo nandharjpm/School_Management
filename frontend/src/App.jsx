@@ -14,6 +14,7 @@ import Location_add from "./views/component/master/location/Location_add";
 import LocationView from "./views/component/master/location/LocationView";
 import LocationEdit from "./views/component/master/location/LocationEdit";
 
+
 export default function App() {
   return (
     <div>
