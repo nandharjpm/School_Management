@@ -3,11 +3,12 @@ import crypto from 'crypto';
 import {sendMail} from "../utils/sendMail.js";
 import User  from '../models/Users.js';
 
-const verificationToken = crypto.randomBytes(32).toString('hex');
 
 export const registerUser = async (req, res) => {
   try {
-
+    console.log("registerUser() called with body:", req.body); 
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+    
     const { email, username, password, mobile } = req.body;
     if (!email || !username || !password || !mobile) {
       req.flash('error', 'Please enter all fields');
@@ -45,6 +46,7 @@ export const registerUser = async (req, res) => {
 
 
     const verificationUrl = `${process.env.BACKEND_URL}api/verify-email?token=${verificationToken}`;
+    res.status(201).json({ message: "User Created Successfully" });
     await sendMail(
       email,
       "Verify your account",
@@ -52,8 +54,16 @@ export const registerUser = async (req, res) => {
        <p>Click the link below to verify your account:</p>
        <a href="${verificationUrl}">Verify its You</a>`
     );
+    console.log("previous email is called");
 
-    return res.status(201).json({ message: "User Created Successfully" });
+    await sendMail(
+      email,
+      "Welcome to NK College Management",
+      null,
+      "NK College Management",
+      username
+    );
+    console.log("Ai Mail Called")
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: err.message });

@@ -11,7 +11,7 @@ export default function Confirmation(){
                         Verification Email is Sent to Your Email
                     </h2>
                     <p className="bg-gradient-to-r from-gray-800 via-gray-100 to-gray-800 text-transparent text-center mb-8">
-                        <span className="font-bold text-black">Please the click the link in the email to verify your account.</span>
+                        <span className="font-bold text-black px-5" style={{backgroundColor:"#ffffffff", borderRadius:"12px"}}>Verification Link is sent to your Account.</span>
                     </p>
                 </div>
             </div>
