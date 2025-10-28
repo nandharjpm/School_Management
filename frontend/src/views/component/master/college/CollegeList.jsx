@@ -7,6 +7,7 @@ import {AddCollegebutton} from "../../../../utils/components/Addbutton";
 import {FaEdit, FaEye, FaTrash} from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import {getLocationNamebyId} from "../../../../utils/helpers/Helper";
 
 
 export default function CollegeList(){
@@ -22,7 +23,14 @@ export default function CollegeList(){
       try{
         const getCollegeData = await axios.get(`${api}/college`);
         const data = getCollegeData.data.college_list;
-        setCollege(data);
+        
+        const withLocation = await Promise.all(
+        data.map(async (item) => {
+          const locationName = await getLocationNamebyId(item.location_id);
+          return { ...item, location_name: locationName };
+        })
+      );
+        setCollege(withLocation);
       }catch(err){
         console.log(err);
       }
@@ -49,6 +57,7 @@ export default function CollegeList(){
     
       const columns = [
         {name: "S.NO",selector: (row, index) => (index + 1),sortable: true,},
+        {name: "Location", selector: (row) => row.location_name, sortable: true },
         {name: "College", selector: (row) => row.college, sortable: true },
         {name:"Action",
           cell:(row)=>(
