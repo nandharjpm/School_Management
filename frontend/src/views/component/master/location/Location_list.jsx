@@ -4,7 +4,7 @@ import LeftMenu from "../../../admin/admin_panel/LeftMenu";
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Addbutton from "../../../../utils/components/Addbutton";
+import {AddLocationbutton} from "../../../../utils/components/Addbutton";
 import {FaEdit, FaEye, FaTrash} from "react-icons/fa";
 import Swal from "sweetalert2";
 
@@ -111,7 +111,7 @@ export default function Location_list() {
       <div style={{ marginTop: 120, height:"20%", marginLeft: 70, width: "75%", padding: 40, borderRadius: "20px", background: "rgba(243, 243, 243, 0.25)", boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)"}}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px"}}>
           <h2 style={{ color: "#000000ff", fontWeight: 600 }}>Location Details</h2>
-          <Addbutton onClick={()=>navigate("/location/add")}/>
+          <AddLocationbutton onClick={()=>navigate("/location/add")}/>
         </div>
 
         <DataTable

@@ -45,6 +45,7 @@ export default function LeftMenu() {
           </MenuItem>
 
           <SubMenu icon={<FaUserCog />} label="Master">
+
             <MenuItem
               icon={<FaHotel />}
               onClick={() => navigate("/college")}
@@ -52,6 +53,7 @@ export default function LeftMenu() {
             >
               College
             </MenuItem>
+            
             <MenuItem
               icon={<FaLocationArrow />}
               onClick={() => navigate("/location")}
