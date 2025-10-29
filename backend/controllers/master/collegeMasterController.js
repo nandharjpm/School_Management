@@ -38,7 +38,42 @@ const storeCollege = async (req, res) => {
   }
 };
 
+
+const getCollegeEdit = async (req, res) => {
+  try{
+    const editCollege = await College.findById(req.params.id)
+    console.log(editCollege);
+    if(!editCollege){
+      return res.status(404).json({message:"College No Found"});
+    }
+    return res.status(200).json({editCollege});
+  }catch(err){
+    return res.status(500).json({message:err});
+  }
+}
+
+
+const updateCollege = async(req,res)=>{
+  try{
+    const{location, college} = req.body;
+
+    if(!location){
+      return res.status(400).json({message:"Location is Required"});
+    }
+    if(!college){
+      return res.status(400).json({message:"College is Required"});
+    }
+
+    await College.findByIdAndUpdate()
+  
+  }catch(err){
+    return res.status(500).json({err})
+  }
+}
+
 export const collegeMasterController = {
   getCollege,
   storeCollege,
+  getCollegeEdit,
+  updateCollege
 };

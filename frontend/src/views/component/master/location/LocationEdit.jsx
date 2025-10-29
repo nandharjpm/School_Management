@@ -71,7 +71,13 @@ export default function LocationEdit() {
             type="text"
             id={id}
             defaultValue={editData}
-            {...register("location", {required: "Location Name is Required"})}
+            {...register("location", {
+              required: "Location Name is Required",
+              pattern:{
+                value:/^[A-Za-z\s]+$/,
+                message:"Letters Only Allowed"
+              }
+            })}
             style={{ border: "1px solid rgba(255,255,255,0.2)", width: "60%", padding: "12px 15px", borderRadius: "12px", fontSize: "16px", outline: "none", background: "rgba(255,255,255,0.1)", color: "#000000ff", boxShadow: "0 4px 15px rgba(0,0,0,0.3)", transition: "all 0.3s ease"}}
             onFocus={(e) => (e.target.style.border = "1px solid rgba(0,255,255,0.6)")}
             onBlur={(e) => (e.target.style.border = "1px solid rgba(255,255,255,0.2)")}

@@ -21,6 +21,7 @@ import LocationView from "./views/component/master/location/LocationView";
 import LocationEdit from "./views/component/master/location/LocationEdit";
 import CollegeList from "./views/component/master/college/CollegeList";
 import CollegeAdd from "./views/component/master/college/CollegeAdd";
+import CollegeEdit from "./views/component/master/college/CollegeEdit";
 
 export default function App() {
   return (
@@ -56,7 +57,7 @@ export default function App() {
               <Route path="list" element={<CollegeList />} />
               <Route path="add" element={<CollegeAdd />} />
               {/* <Route path="view/:id" element={<CollegeView />} /> */}
-              {/* <Route path="edit/:id" element={<CollegeEdit />} /> */}
+              <Route path="edit/:id" element={<CollegeEdit />} />
             </Route>
 
 

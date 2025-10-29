@@ -22,6 +22,8 @@ router.post('/delete-location/:id', locationMasterController.DeleteLocation);
 // college Master
 router.get('/college', collegeMasterController.getCollege);
 router.post('/college-submit', collegeMasterController.storeCollege);
+router.get('/edit-college/:id', collegeMasterController.getCollegeEdit);
+router.get('/college-edit-submit', collegeMasterController.updateCollege);
 
 
 export default router;
