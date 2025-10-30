@@ -2,8 +2,9 @@ import axios from "axios";
 
 export async function getLocationNamebyId(id) {
   try {
+    console.log("locc : ", id);
     const api = import.meta.env.VITE_API_URL;
-    const res = await axios.get(`${api}/get-location/${id}`);
+    const res = await axios.get(`${api}/get-location/${id}`);    
     return res.data.locationView.location;
   } catch (err) {
     console.error("Error fetching location:", err);

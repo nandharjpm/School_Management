@@ -38,55 +38,68 @@ const storeCollege = async (req, res) => {
   }
 };
 
-
 const getCollegeEdit = async (req, res) => {
-  try{
-    const editCollege = await College.findById(req.params.id)
+  try {
+    const editCollege = await College.findById(req.params.id);
     console.log(editCollege);
-    if(!editCollege){
-      return res.status(404).json({message:"College No Found"});
+    if (!editCollege) {
+      return res.status(404).json({ message: "College No Found" });
     }
-    return res.status(200).json({editCollege});
-  }catch(err){
-    return res.status(500).json({message:err});
+    return res.status(200).json({ editCollege });
+  } catch (err) {
+    return res.status(500).json({ message: err });
   }
-}
+};
 
-
-const updateCollege = async(req,res)=>{
-  try{
+const updateCollege = async (req, res) => {
+  try {
     console.log(req.body);
-    const{_id, location, college} = req.body;
+    const { _id, location, college } = req.body;
 
-    if(!location){
-      return res.status(400).json({message:"Location is Required"});
+    if (!location) {
+      return res.status(400).json({ message: "Location is Required" });
     }
-    if(!college){
-      return res.status(400).json({message:"College is Required"});
+    if (!college) {
+      return res.status(400).json({ message: "College is Required" });
     }
 
-    await College.findByIdAndUpdate(_id,{location_id:location, college:college});
-    return res.status(201).json({message:"College is Updated Successfully"});
-  
-  }catch(err){
-    return res.status(500).json({err})
+    await College.findByIdAndUpdate(_id, {
+      location_id: location,
+      college: college,
+    });
+    return res.status(201).json({ message: "College is Updated Successfully" });
+  } catch (err) {
+    return res.status(500).json({ err });
   }
-}
+};
 
-const deleteCollege = async(req,res)=>{
-  try{
-    const {id} = req.params;
-    await College.delete({_id:id});
-    res.status(200).json({message:"Location Deleted Successfully"});
-  }catch(err){
-    return res.status(500).json({err});
+const deleteCollege = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await College.delete({ _id: id });
+    res.status(200).json({ message: "Location Deleted Successfully" });
+  } catch (err) {
+    return res.status(500).json({ err });
   }
-}
+};
+
+const viewCollege = async (req, res) => {
+  try {
+    const collegeView = await College.findById(req.params.id);
+    if (!collegeView) {
+      res.status(400).json({ message: "College Not Found" });
+    }
+    res.status(200).json({ collegeView });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 export const collegeMasterController = {
   getCollege,
   storeCollege,
   getCollegeEdit,
   updateCollege,
-  deleteCollege
+  deleteCollege,
+  viewCollege
 };

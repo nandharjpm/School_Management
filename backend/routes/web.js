@@ -25,6 +25,7 @@ router.post('/college-submit', collegeMasterController.storeCollege);
 router.get('/edit-college/:id', collegeMasterController.getCollegeEdit);
 router.post('/college-edit-submit', collegeMasterController.updateCollege);
 router.post('/delete-college/:id', collegeMasterController.deleteCollege);
+router.get('/get-college/:id', collegeMasterController.viewCollege);    
 
 
 export default router;
