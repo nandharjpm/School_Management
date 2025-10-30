@@ -55,7 +55,8 @@ const getCollegeEdit = async (req, res) => {
 
 const updateCollege = async(req,res)=>{
   try{
-    const{location, college} = req.body;
+    console.log(req.body);
+    const{_id, location, college} = req.body;
 
     if(!location){
       return res.status(400).json({message:"Location is Required"});
@@ -64,10 +65,21 @@ const updateCollege = async(req,res)=>{
       return res.status(400).json({message:"College is Required"});
     }
 
-    await College.findByIdAndUpdate()
+    await College.findByIdAndUpdate(_id,{location_id:location, college:college});
+    return res.status(201).json({message:"College is Updated Successfully"});
   
   }catch(err){
     return res.status(500).json({err})
+  }
+}
+
+const deleteCollege = async(req,res)=>{
+  try{
+    const {id} = req.params;
+    await College.delete({_id:id});
+    res.status(200).json({message:"Location Deleted Successfully"});
+  }catch(err){
+    return res.status(500).json({err});
   }
 }
 
@@ -75,5 +87,6 @@ export const collegeMasterController = {
   getCollege,
   storeCollege,
   getCollegeEdit,
-  updateCollege
+  updateCollege,
+  deleteCollege
 };

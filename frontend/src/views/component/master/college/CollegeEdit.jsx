@@ -15,26 +15,28 @@ export default function CollegeEdit() {
   const api = import.meta.env.VITE_API_URL;
   const { id } = useParams();
   const navigate = useNavigate();
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm();
+  const { control, register, handleSubmit, formState: { errors }, setValue } = useForm();
 
   useEffect(() => {
-    fetchLocation();
     fetchCollege();
-  }, [id]);
+  }, []);
+
+  useEffect(()=>{
+    fetchLocation();
+  },[]);
+
+
+  useEffect(()=>{
+    if(college && college.location_id && locations.length>0){
+        setValue("college", college.college);
+        setValue("location",college.location_id);
+    }
+  },[college, locations]);
 
   const fetchLocation = async () => {
     try {
       const getLocation = await axios.get(`${api}/location`);
-      const location_data = getLocation.data.locationData;
-      console.log(location_data);
-      setLocation(location_data);
-      setValue("location", location_data._id);
+      setLocation(getLocation.data.locationData);
     } catch (err) {
       console.log(err);
     }
@@ -43,93 +45,55 @@ export default function CollegeEdit() {
   const fetchCollege = async () => {
     try {
       const getCollege = await axios.get(`${api}/edit-college/${id}`);
-      const college_data = getCollege.data.editCollege;
-      console.log(college_data);
-      setCollege(college_data.college);
-      setValue("college", college_data);
+      setCollege(getCollege.data.editCollege);
     } catch (err) {
       console.log(err);
     }
   };
+  
+  
 
   const onSubmit = async (data) => {
     try {
-      const result = await axios.post(`${api}/college-edit-submit`, data);
-      if (result.status === 201) {
+        const payload = {
+            _id:id,
+            college:data.college,
+            location:data.location
+        };
+        const result = await axios.post(`${api}/college-edit-submit`, payload);
         toast.success("College is Updated");
-      }
     } catch (err) {
-      toast.error("Something went Wrong");
-      console.log(err);
+      toast.error(err);
     }
     navigate("/college/list");
   };
 
   return (
     <div
-      style={{
-        display: "flex",
-        minHeight: "100vh",
-        fontFamily: "'Poppins', sans-serif",
-        color: "#fff",
-      }}
+      style={{ display: "flex", minHeight: "100vh", fontFamily: "'Poppins', sans-serif", color: "#fff"}}
     >
       <Header />
       <LeftMenu />
       <div
-        style={{
-          marginTop: 120,
-          marginLeft: 100,
-          boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)",
-          padding: 40,
-          height: "90%",
-          width: "70%",
-          borderRadius: "20px",
-        }}
+        style={{ marginTop: 120, marginLeft: 100, boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)", padding: 40, height: "90%", width: "70%", borderRadius: "20px"}}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-start",
-            marginBottom: "5px",
-          }}
-        >
+        <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: "5px"}}>
           <Backbutton onClick={() => navigate("/college/list")} />
         </div>
 
         <p
           className="text-center text-2xl"
-          style={{
-            backgroundColor: "#cfcfcfff",
-            padding: "8px",
-            marginBottom: "8px",
-            borderRadius: "5px",
-            color: "#000",
-            fontWeight: "600",
-          }}
+          style={{ backgroundColor: "#cfcfcfff", padding: "8px", marginBottom: "8px", borderRadius: "5px", color: "#000", fontWeight: "600"}}
         >
           College Edit
         </p>
 
         <form onSubmit={handleSubmit(onSubmit)} style={{ marginTop: "30px" }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "40px",
-              alignItems: "start",
-            }}
-          >
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "40px", alignItems: "start"}}>
             <div>
               <label
                 htmlFor="location"
-                style={{
-                  display: "block",
-                  fontSize: "1.2rem",
-                  fontWeight: "500",
-                  color: "#000",
-                  marginBottom: "10px",
-                }}
+                style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px"}}
               >
                 Location
               </label>
@@ -137,7 +101,6 @@ export default function CollegeEdit() {
               <Controller
                 name="location"
                 control={control}
-                defaultValue=""
                 rules={{ required: "Location is required" }}
                 render={({ field }) => (
                   <Select
@@ -147,12 +110,10 @@ export default function CollegeEdit() {
                       label: loc.location,
                     }))}
                     placeholder="Select Location"
-                    isClearable
                     value={
                       locations
                         .map((loc) => ({ value: loc._id, label: loc.location }))
-                        .find(
-                          (option) => option.value === college.location_id
+                        .find((option) => option.value === field.value
                         ) || null
                     }
                     onChange={(selectedOption) => {
@@ -210,7 +171,7 @@ export default function CollegeEdit() {
               <input
                 type="text"
                 id="college"
-                defaultValue={college}
+                defaultValue={''}
                 {...register("college", {
                   required: "College Name is Required",
                   pattern: {
