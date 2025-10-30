@@ -1,17 +1,7 @@
 import React, { useState } from "react";
 import "../../../css/leftmenu_style.css";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import {
-  FaBars,
-  FaBuilding,
-  FaHotel,
-  FaLocationArrow,
-  FaUser,
-  FaUserCog,
-  FaUserGraduate,
-  FaUsers,
-  FaUserTie,
-} from "react-icons/fa";
+import { FaBars, FaBuilding, FaHotel, FaLocationArrow, FaUser, FaUserCog, FaUserGraduate, FaUsers, FaUserTie} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 export default function LeftMenu() {
@@ -19,7 +9,7 @@ export default function LeftMenu() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ display: "flex", height: "100vh", marginTop: "60px" }}>
+    <div style={{ display: "flex", height: "90vh", marginTop: "60px" }}>
       <Sidebar collapsed={collapsed} className="left-menu">
         <Menu
           menuItemStyles={{
@@ -68,7 +58,8 @@ export default function LeftMenu() {
             >
               Building
             </MenuItem>
-            <SubMenu icon={<FaUser />} label="User Master">
+          </SubMenu>
+          <SubMenu icon={<FaUser />} label="User Master">
               <MenuItem
                 icon={<FaUserTie />}
                 onClick={() => navigate("/satff")}
@@ -91,7 +82,6 @@ export default function LeftMenu() {
                 Employees
               </MenuItem>
             </SubMenu>
-          </SubMenu>
         </Menu>
       </Sidebar>
     </div>

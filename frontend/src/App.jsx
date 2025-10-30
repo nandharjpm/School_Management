@@ -44,7 +44,8 @@ export default function App() {
                 </ProtectedRouter>
               }
             />
-            <Route path="location" element={<Outlet />}>
+            <Route path="location" element={<ProtectedRouter>  <Outlet /></ProtectedRouter>}
+            >
               <Route index element={<Navigate to="list" replace />} />
               <Route path="list" element={<Location_list />} />
               <Route path="add" element={<Location_add />} />
@@ -52,15 +53,13 @@ export default function App() {
               <Route path="edit/:id" element={<LocationEdit />} />
             </Route>
 
-            <Route path="college" element={<Outlet />}>
+            <Route path="college" element={ <ProtectedRouter><Outlet /></ProtectedRouter>}>
               <Route index element={<Navigate to="list" replace />} />
               <Route path="list" element={<CollegeList />} />
               <Route path="add" element={<CollegeAdd />} />
               {/* <Route path="view/:id" element={<CollegeView />} /> */}
               <Route path="edit/:id" element={<CollegeEdit />} />
             </Route>
-
-
           </Routes>
         </UserProvider>
       </BrowserRouter>
