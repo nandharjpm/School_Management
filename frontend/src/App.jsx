@@ -19,10 +19,16 @@ import Location_list from "./views/component/master/location/Location_list";
 import Location_add from "./views/component/master/location/Location_add";
 import LocationView from "./views/component/master/location/LocationView";
 import LocationEdit from "./views/component/master/location/LocationEdit";
+
 import CollegeList from "./views/component/master/college/CollegeList";
 import CollegeAdd from "./views/component/master/college/CollegeAdd";
 import CollegeEdit from "./views/component/master/college/CollegeEdit";
 import CollegeView from "./views/component/master/college/CollegeView";
+
+import BuildingList from "./views/component/master/building/BuildingList";
+import BuildingAdd from "./views/component/master/building/BuildingAdd";
+import BuildingEdit from "./views/component/master/building/BuildingEdit";
+import BuildingView from "./views/component/master/building/BuildingView";
 
 export default function App() {
   return (
@@ -60,6 +66,14 @@ export default function App() {
               <Route path="add" element={<CollegeAdd />} />
               <Route path="view/:id" element={<CollegeView />} />
               <Route path="edit/:id" element={<CollegeEdit />} />
+            </Route>
+
+            <Route path="building" element={<ProtectedRouter> <Outlet /> </ProtectedRouter>} >
+              <Route index element={<Navigate to="list" replace />} />
+              <Route path="list" element={<BuildingList />} />
+              <Route path="add" element={<BuildingAdd />} />
+              <Route path="view/:id" element={<BuildingView />} />
+              <Route path="edit/:id" element={<BuildingEdit />} />
             </Route>
           </Routes>
         </UserProvider>

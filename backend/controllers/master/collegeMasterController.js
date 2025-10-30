@@ -26,10 +26,7 @@ const storeCollege = async (req, res) => {
       return res.status(400).json({ message: "College is Alredy Exist" });
     }
 
-    const saveCollege = new College({
-      location_id: location,
-      college,
-    });
+    const saveCollege = new College({ location_id: location, college});
 
     await saveCollege.save();
     return res.status(201).json({ message: "College is Created Successfully" });

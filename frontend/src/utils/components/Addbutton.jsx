@@ -1,5 +1,6 @@
 import { RiMapPinAddFill } from "react-icons/ri";
 import { BsBuildingFillAdd } from "react-icons/bs";
+import { MdOutlineDomainAdd } from "react-icons/md";
 
 export function AddLocationbutton({ onClick }) {
   return (
@@ -51,6 +52,34 @@ export function AddCollegebutton({ onClick }) {
       }}
     >
       <BsBuildingFillAdd />
+    </button>
+  );
+}
+
+
+export function AddBuildingbutton({ onClick }) {
+  return (
+    <button
+      style={{
+        background: "#5f5f5fff",
+        color: "#fff",
+        fontWeight: "600",
+        cursor: "pointer",
+        borderRadius: "12px",
+        padding: "12px",
+        transition: "all 0.5s ease",
+      }}
+      onClick={onClick}
+      onMouseEnter={(e) => {
+        e.target.style.boxShadow = "#00e1ffff";
+        e.target.style.transform = "scale(1.05)";
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.boxShadow = "#fff";
+        e.target.style.transform = "scale(1)";
+      }}
+    >
+      <MdOutlineDomainAdd />
     </button>
   );
 }

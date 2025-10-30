@@ -22,7 +22,7 @@ export default function Location_add() {
           navigate("/location/list"); 
         }
     }catch(err){
-        console.log(err);
+      toast.error(err.response.data.message)
     }
   }
 

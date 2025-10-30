@@ -4,6 +4,7 @@ import { emailVerification } from '../controllers/verificationController.js';
 import {authenticationController} from '../controllers/authenticationController.js'
 import {locationMasterController} from '../controllers/master/locationMasterController.js'
 import { collegeMasterController } from '../controllers/master/collegeMasterController.js';
+import {buildingMasterController} from '../controllers/master/buildingMasterController.js'
 
 const router = express.Router();
 
@@ -25,7 +26,15 @@ router.post('/college-submit', collegeMasterController.storeCollege);
 router.get('/edit-college/:id', collegeMasterController.getCollegeEdit);
 router.post('/college-edit-submit', collegeMasterController.updateCollege);
 router.post('/delete-college/:id', collegeMasterController.deleteCollege);
-router.get('/get-college/:id', collegeMasterController.viewCollege);    
+router.get('/get-college/:id', collegeMasterController.viewCollege);
+
+// building master
+router.get('/building', buildingMasterController.getBuilding);
+router.post('/building-submit', buildingMasterController.storeBuilding);
+router.get('/edit-building/:id', buildingMasterController.getBuildingEdit);
+router.post('/building-edit-submit', buildingMasterController.updateBuilding);
+router.post('/delete-building/:id', buildingMasterController.deleteBuilding);
+router.get('/get-building/:id', buildingMasterController.viewBuilding);
 
 
 export default router;
