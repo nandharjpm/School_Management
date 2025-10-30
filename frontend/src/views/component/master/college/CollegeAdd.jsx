@@ -105,12 +105,7 @@ export default function CollegeAdd() {
                         boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
                         transition: "all 0.3s ease",
                       }),
-                      option: (base, state) => ({
-                        ...base,
-                        border: state.isFocused
-                          ? "1px solid #00e1ff"
-                          : "1px solid rgba(255,255,255,0.2)",
-                        color: "#000",
+                      option: (base, state) => ({...base,border: state.isFocused  ? "1px solid #00e1ff"  : "1px solid rgba(255,255,255,0.2)",color: "#000",
                       }),
                     }}
                   />
@@ -127,13 +122,7 @@ export default function CollegeAdd() {
             <div>
               <label
                 htmlFor="college"
-                style={{
-                  display: "block",
-                  fontSize: "1.2rem",
-                  fontWeight: "500",
-                  color: "#000",
-                  marginBottom: "10px",
-                }}
+                style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px"}}
               >
                 College Name
               </label>
@@ -148,18 +137,7 @@ export default function CollegeAdd() {
                     message:"Letters Only Allowed"
                   }
                 })}
-                style={{
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  width: "100%",
-                  padding: "12px 15px",
-                  borderRadius: "12px",
-                  fontSize: "16px",
-                  outline: "none",
-                  background: "rgba(255,255,255,0.1)",
-                  color: "#000",
-                  boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
-                  transition: "all 0.3s ease",
-                }}
+                style={{ border: "1px solid rgba(255,255,255,0.2)", width: "100%", padding: "12px 15px", borderRadius: "12px", fontSize: "16px", outline: "none", background: "rgba(255,255,255,0.1)", color: "#000", boxShadow: "0 4px 15px rgba(0,0,0,0.3)", transition: "all 0.3s ease"}}
                 onFocus={(e) =>
                   (e.target.style.border = "1px solid rgba(0,255,255,0.6)")
                 }
@@ -176,11 +154,7 @@ export default function CollegeAdd() {
           </div>
 
           <div
-            style={{
-              marginTop: "40px",
-              display: "flex",
-              justifyContent: "end",
-            }}
+            style={{ marginTop: "40px", display: "flex", justifyContent: "end"}}
           >
             <Submitbutton />
           </div>
