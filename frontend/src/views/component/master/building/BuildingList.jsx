@@ -67,7 +67,7 @@ export default function BuildingList(){
             <div style={{display:"flex", gap:"15px"}}>
               <FaEye
                 title="View"
-                onClick={()=>navigate(`/college/view/${row._id}`)}
+                onClick={()=>navigate(`/building/view/${row._id}`)}
                 style={{
                   cursor:"pointer",
                   color:"#003cffff",
@@ -78,7 +78,7 @@ export default function BuildingList(){
               />
               <FaEdit 
                 title="Edit"
-                onClick={()=>navigate(`/college/edit/${row._id}`)}
+                onClick={()=>navigate(`/building/edit/${row._id}`)}
                 style={{
                   color:"#006d0fff",
                   fontSize:"20px",

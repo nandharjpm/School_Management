@@ -42,7 +42,6 @@ const storeBuilding = async (req, res) => {
 const getBuildingEdit = async (req, res) => {
   try {
     const editBuilding = await Building.findById(req.params.id);
-    console.log(editBuilding);
     if (!editBuilding) {
       return res.status(404).json({ message: "Building No Found" });
     }
@@ -54,8 +53,8 @@ const getBuildingEdit = async (req, res) => {
 
 const updateBuilding = async (req, res) => {
   try {
-    console.log(req.body);
-    const { _id, location, building } = req.body;
+    
+    const { _id, location, college, building } = req.body;
 
     if (!location) {
       return res.status(400).json({ message: "Location is Required" });
@@ -64,10 +63,7 @@ const updateBuilding = async (req, res) => {
       return res.status(400).json({ message: "Building is Required" });
     }
 
-    await Building.findByIdAndUpdate(_id, {
-      location_id: location,
-      college: college,
-    });
+    await Building.findByIdAndUpdate(_id, { location_id: location, college_id: college, building});
     return res.status(201).json({ message: "Building is Updated Successfully" });
   } catch (err) {
     return res.status(500).json({ err });

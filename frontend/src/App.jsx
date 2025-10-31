@@ -30,6 +30,7 @@ import BuildingAdd from "./views/component/master/building/BuildingAdd";
 import BuildingEdit from "./views/component/master/building/BuildingEdit";
 import BuildingView from "./views/component/master/building/BuildingView";
 
+
 export default function App() {
   return (
     <div>
