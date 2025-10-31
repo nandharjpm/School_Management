@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const UserSchema = new mongoose.Schema({
   name: { type: String, required: false },
   email: { type: String, required: true },
-  role: { type: Number, required: false },
+  role: { type: Number, required: false }, // 1-> admin -> 2
   user_type: { type: Number, required: false },
   is_staff: { type: Boolean, required: false },
   username: { type: String, required: true },

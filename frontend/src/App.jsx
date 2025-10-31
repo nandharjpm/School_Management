@@ -12,6 +12,7 @@ import Confirmation from "./views/auth/Confirmation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminDashboard from "./views/component/AdminDashboard";
+import UserForm from "./views/component/UserForm";
 import ProtectedRouter from "./views/component/ProtectedRouter";
 import { UserProvider } from "./context/UserContext";
 import LeftMenu from "./views/admin/admin_panel/LeftMenu";
@@ -44,11 +45,11 @@ export default function App() {
             <Route path="/confirmation" element={<Confirmation />} />
             <Route path="*" element={<h1>Page Not Found</h1>} />
             <Route
-              path="/admindashboard"
+              path="/userform"
               element={
                 <ProtectedRouter>
+                  <UserForm />
                   <AdminDashboard />
-                  <LeftMenu />
                 </ProtectedRouter>
               }
             />

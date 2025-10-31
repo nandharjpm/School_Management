@@ -27,7 +27,7 @@ export default function Login() {
         localStorage.setItem("token", result.data.token);
         toast.success('Login Successfully');
         setUser(result.data.user);
-        navigate("/admindashboard");
+        navigate("/userform");
       }
     }catch(err){
       toast.error(err.response.data.message);
