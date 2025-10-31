@@ -88,6 +88,21 @@ const viewCollege = async (req, res) => {
   }
 };
 
+const locBasedCollege = async(req,res) => {
+  try{
+    const locationId = req.params.id;
+    const getCollege = await College.find({location_id: locationId});    
+    console.log(getCollege);
+    
+    if(!getCollege){
+      return res.status(404).json({message:"College Not Found"});
+    }
+    return res.status(200).json({getCollege});
+  }catch(err){
+    return res.status(500).json({message:err});
+  }
+}
+
 export const collegeMasterController = {
   getCollege,
   storeCollege,
@@ -95,4 +110,5 @@ export const collegeMasterController = {
   updateCollege,
   deleteCollege,
   viewCollege,
+  locBasedCollege
 };

@@ -10,9 +10,9 @@ const getBuilding = async (req, res) => {
 };
 
 const storeBuilding = async (req, res) => {
-  try {
-    const { college, location } = req.body;
-    const existingCollege = await College.findOne({ college });
+  try {    
+    const { college, location, building } = req.body;
+    const existingBuilding = await Building.findOne({ building });
 
     if (!location) {
       return res.status(400).json({ message: "Location is Required" });
@@ -22,14 +22,15 @@ const storeBuilding = async (req, res) => {
       return res.status(400).json({ message: "College is Required" });
     }
 
-    if (existingCollege) {
-      return res.status(400).json({ message: "College is Alredy Exist" });
+    if (!building) {
+      return res.status(400).json({ message: "Building is Required" });
     }
 
-    const saveCollege = new College({
-      location_id: location,
-      college,
-    });
+    if (existingBuilding) {
+      return res.status(400).json({ message: "Building is Alredy Exist" });
+    }
+
+    const saveCollege = new Building({ location_id: location, college_id:college, building});
 
     await saveCollege.save();
     return res.status(201).json({ message: "College is Created Successfully" });

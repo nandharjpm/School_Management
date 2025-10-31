@@ -20,10 +20,6 @@ export default function BuildingAdd() {
     fetchLocation();
   }, []);
 
-  useEffect(()=>{
-    fetchCollege();
-  },[]);
-
   const fetchLocation = async () => {
     try {
       const getLocation = await axios.get(`${api}/location`);
@@ -34,11 +30,16 @@ export default function BuildingAdd() {
     }
   };
 
-  const fetchCollege = async () => {
+  const fetchCollege = async (locationId) => {
     try{
-        const getCollege = await axios.get(`${api}/college`);
-        const dropDownCollege = getCollege.data.college_list;        
-        setCollege(dropDownCollege);
+      if(!locationId){
+        setCollege([]);
+        return;
+      }
+      const getCollege = await axios.post(`${api}/college/location_id/${locationId}`);
+      const dropDownCollege = getCollege.data.getCollege;
+      
+      setCollege(dropDownCollege);
     }catch(err){
         console.log(err);
     }
@@ -83,55 +84,55 @@ export default function BuildingAdd() {
                 Location
               </label>
 
-              <Controller
-                name="location"
-                control={control}
-                defaultValue=""
-                rules={{ required: "Location is required" }}
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    options={locations.map((loc) => ({
-                      value: loc._id,
-                      label: loc.location,
-                    }))}
-                    placeholder="Select Location"
-                    isClearable
-                    onChange={(selectedOption) => {
-                      field.onChange(
-                        selectedOption ? selectedOption.value : ""
-                      );
-                    }}
-                    value={
-                      locations
-                        .map((loc) => ({ value: loc._id, label: loc.location }))
-                        .find((option) => option.value === field.value) || null
-                    }
-                    styles={{
-                      control: (base) => ({
-                        ...base,
-                        border: "1px solid rgba(255,255,255,0.2)",
-                        width: "100%",
-                        padding: "8px 15px",
-                        borderRadius: "12px",
-                        fontSize: "16px",
-                        outline: "none",
-                        background: "rgba(255,255,255,0.1)",
-                        color: "#000",
-                        boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
-                        transition: "all 0.3s ease",
-                      }),
-                      option: (base, state) => ({
-                        ...base,
-                        border: state.isFocused
-                          ? "1px solid #00e1ff"
-                          : "1px solid rgba(255,255,255,0.2)",
-                        color: "#000",
-                      }),
-                    }}
-                  />
-                )}
-              />
+                <Controller
+                  name="location"
+                  control={control}
+                  defaultValue=""
+                  rules={{ required: "Location is required" }}
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      options={locations.map((loc) => ({
+                        value: loc._id,
+                        label: loc.location,
+                      }))}
+                      placeholder="Select Location"
+                      isClearable
+                      onChange={(selectedOption) => {
+                        const selectedValue = selectedOption ? selectedOption.value : '';
+                        field.onChange(selectedValue);
+                        fetchCollege(selectedValue)
+                      }}
+                      value={
+                        locations
+                          .map((loc) => ({ value: loc._id, label: loc.location }))
+                          .find((option) => option.value === field.value) || null
+                      }
+                      styles={{
+                        control: (base) => ({
+                          ...base,
+                          border: "1px solid rgba(255,255,255,0.2)",
+                          width: "100%",
+                          padding: "8px 15px",
+                          borderRadius: "12px",
+                          fontSize: "16px",
+                          outline: "none",
+                          background: "rgba(255,255,255,0.1)",
+                          color: "#000",
+                          boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+                          transition: "all 0.3s ease",
+                        }),
+                        option: (base, state) => ({
+                          ...base,
+                          border: state.isFocused
+                            ? "1px solid #00e1ff"
+                            : "1px solid rgba(255,255,255,0.2)",
+                          color: "#000",
+                        }),
+                      }}
+                    />
+                  )}
+                />
 
               {errors.location && (
                 <p style={{ color: "red", marginTop: "5px" }}>
@@ -154,15 +155,15 @@ export default function BuildingAdd() {
               <Controller
                 name="college"
                 control={control}
-                defaultValue=""
+                defaultValue=''
                 rules={{ required: "College is required" }}
                 render={({ field }) => (
                   <Select
                     {...field}
-                    options={college.map((col) => ({
+                    options={college?.map((col) => ({
                       value: col._id,
                       label: col.college,
-                    }))}
+                    })) || []}
                     placeholder="Select College"
                     isClearable
                     onChange={(selectedOption) => {
@@ -171,8 +172,7 @@ export default function BuildingAdd() {
                       );
                     }}
                     value={
-                      college
-                        .map((col) => ({ value: col._id, label: col.college }))
+                      college?.map((col) => ({ value: col._id, label: col.college }))
                         .find((option) => option.value === field.value) || null
                     }
                     styles={{
@@ -213,7 +213,7 @@ export default function BuildingAdd() {
 
             <div>
               <label
-                htmlFor="college"
+                htmlFor="building"
                 style={{
                   display: "block",
                   fontSize: "1.2rem",
@@ -222,14 +222,14 @@ export default function BuildingAdd() {
                   marginBottom: "10px",
                 }}
               >
-                College Name
+                Building Name
               </label>
 
               <input
                 type="text"
-                id="college"
-                {...register("college", {
-                  required: "College Name is Required",
+                id="building"
+                {...register("building", {
+                  required: "Building Name is Required",
                   pattern:{
                     value:/^[A-Za-z\s]+$/,
                     message:"Letters Only Allowed"
@@ -254,9 +254,9 @@ export default function BuildingAdd() {
                   (e.target.style.border = "1px solid rgba(255,255,255,0.2)")
                 }
               />
-              {errors.college && (
+              {errors.building && (
                 <p style={{ color: "red", marginTop: "5px" }}>
-                  {errors.college.message}
+                  {errors.building.message}
                 </p>
               )}
             </div>

@@ -27,6 +27,7 @@ router.get('/edit-college/:id', collegeMasterController.getCollegeEdit);
 router.post('/college-edit-submit', collegeMasterController.updateCollege);
 router.post('/delete-college/:id', collegeMasterController.deleteCollege);
 router.get('/get-college/:id', collegeMasterController.viewCollege);
+router.post('/college/location_id/:id', collegeMasterController.locBasedCollege);
 
 // building master
 router.get('/building', buildingMasterController.getBuilding);

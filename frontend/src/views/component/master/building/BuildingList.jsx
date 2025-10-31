@@ -18,11 +18,12 @@ export default function BuildingList(){
     useEffect(()=>{
         fetchBuildingList();
     },[])
-
+    
+    
     const fetchBuildingList = async() => {
       try{
         const getBuildingData = await axios.get(`${api}/building`);
-        const data = getBuildingData.data.college_list;
+        const data = getBuildingData.data.buildingData;
         
         const allBuildings = await Promise.all(
         data.map(async (item) => {
@@ -59,7 +60,7 @@ export default function BuildingList(){
       const columns = [
         {name: "S.NO",selector: (row, index) => (index + 1),sortable: true,},
         {name: "Location", selector: (row) => row.location_name, sortable: true },
-        {name: "College", selector: (row) => row.college, sortable: true },
+        {name: "College", selector: (row) => row.college_name, sortable: true },
         {name: "Building", selector: (row) => row.building, sortable: true },
         {name:"Action",
           cell:(row)=>(
