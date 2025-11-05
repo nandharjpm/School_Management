@@ -4,12 +4,20 @@ import Submitbutton from "../../utils/components/Submitbutton";
 import LeftMenu from "../admin/admin_panel/LeftMenu";
 import { useDropzone } from 'react-dropzone';
 import Select from "react-select";
+import axios from "axios";
+import { useState, forwardRef } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 
 export default function UserForm() {
   const { control, register, handleSubmit, formState: { errors }} = useForm();
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
-
+  const [date, setDate] = useState();
+  const navigate = useNavigate();
 
   const api = import.meta.env.VITE_API_URL;
   const roleOptions = [
@@ -31,17 +39,60 @@ export default function UserForm() {
     {value:"8", label:"B.E Chemical Engineering"},
   ];
 
+  const year = [
+    {value:"1", label:"I - Year"},
+    {value:"2", label:"II - Year"},
+    {value:"3", label:"III - Year"},
+    {value:"4", label:"IV - Year"},
+  ];
 
+  const CustomInput = forwardRef(({ value, onClick }, ref) => (
+    <input
+      ref={ref}
+      value={value}
+      onClick={onClick}
+      readOnly
+      style={{
+        border: "1px solid rgba(255,255,255,0.2)",
+        width: "140%",
+        padding: "12px 15px",
+        borderRadius: "12px",
+        fontSize: "16px",
+        outline: "none",
+        background: "rgba(255,255,255,0.1)",
+        color: "#000",
+        boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+        transition: "all 0.3s ease",
+      }}
+    />
+  ));
+
+  const handleDateChange = (selectedDate) => {
+    setDate(selectedDate);
+  }
+
+
+  const onSubmit = async(data) => {
+    try{
+      console.log(data);
+      
+      const datas = await axios.post(`${api}/register`,data);
+      if(datas.status == 201){
+          toast.success('User Created Successfully');
+          navigate("/admindashboard"); 
+        }
+    }catch(err){
+      console.log(err);
+      toast.success('User Created Successfully');
+      
+    }
+  }
 
   return (
-    <div
-      style={{ display: "flex", minHeight: "100vh", fontFamily: "'Poppins', sans-serif", color: "#fff"}}
-    >
+    <div style={{ display: "flex", minHeight: "100vh", fontFamily: "'Poppins', sans-serif", color: "#fff"}}>
       <Header />
       <LeftMenu />
-      <div
-        style={{ marginTop: 120, marginLeft: 100, boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)", padding: 40, height: "90%", width: "70%", borderRadius: "20px"}}
-      >
+      <div style={{ marginTop: 120, marginLeft: 100, boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)", padding: 40, height: "90%", width: "70%", borderRadius: "20px"}} >
         <p
           className="text-center text-2xl"
           style={{ backgroundColor: "#cfcfcfff", padding: "8px", marginBottom: "8px", borderRadius: "5px", color: "#000", fontWeight: "600"}}
@@ -49,8 +100,9 @@ export default function UserForm() {
           Please Fill The Details For Further
         </p>
 
-        <form style={{ marginTop: "30px" }}>
+        <form style={{ marginTop: "30px" }} onSubmit={handleSubmit(onSubmit)}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "40px", alignItems: "start"}}>
+
             <div>
               <label
                 htmlFor="name"
@@ -69,6 +121,7 @@ export default function UserForm() {
                     message: "Letters Only Allowed",
                   },
                 })}
+                placeholder="Enter Your Full Name"
                 style={{ border: "1px solid rgba(255,255,255,0.2)", width: "100%", padding: "12px 15px", borderRadius: "12px", fontSize: "16px", outline: "none", background: "rgba(255,255,255,0.1)", color: "#000", boxShadow: "0 4px 15px rgba(0,0,0,0.3)", transition: "all 0.3s ease"}}
                 onFocus={(e) =>
                   (e.target.style.border = "1px solid rgba(0,255,255,0.6)")
@@ -84,17 +137,93 @@ export default function UserForm() {
               )}
             </div>
 
+
+            <div>
+              <label htmlFor="email" style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px",}}>
+                Email
+              </label>
+              <input
+                type="text"
+                id="email"
+                placeholder="Enter Your Email"
+                {...register("email", {
+                  required: "Name is Required",
+                })}
+                style={{ border: "1px solid rgba(255,255,255,0.2)", width: "100%", padding: "12px 15px", borderRadius: "12px", fontSize: "16px", outline: "none", background: "rgba(255,255,255,0.1)", color: "#000", boxShadow: "0 4px 15px rgba(0,0,0,0.3)", transition: "all 0.3s ease"}}
+                onFocus={(e) =>
+                  (e.target.style.border = "1px solid rgba(0,255,255,0.6)")
+                }
+                onBlur={(e) =>
+                  (e.target.style.border = "1px solid rgba(255,255,255,0.2)")
+                }
+              />
+              {errors.name && (
+                <p style={{ color: "red", marginTop: "5px" }}>
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
+
+
             <div>
               <label
-                htmlFor="username"
-                style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px"}}
+                htmlFor="mobile"
+                style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px",}}
               >
+                Mobile Number
+              </label>
+              <input
+                type="text"
+                placeholder="Enter Your Mobile Number"
+                id="mobile"
+                {...register("mobile", {
+                  required: "Name is Required",
+                  pattern:{
+                    value:/^[0-9]+$/,
+                    message:"Phone Number Must be Number"
+                  }
+                })}
+                style={{ border: "1px solid rgba(255,255,255,0.2)", width: "100%", padding: "12px 15px", borderRadius: "12px", fontSize: "16px", outline: "none", background: "rgba(255,255,255,0.1)", color: "#000", boxShadow: "0 4px 15px rgba(0,0,0,0.3)", transition: "all 0.3s ease"}}
+                onFocus={(e) =>
+                  (e.target.style.border = "1px solid rgba(0,255,255,0.6)")
+                }
+                onBlur={(e) =>
+                  (e.target.style.border = "1px solid rgba(255,255,255,0.2)")
+                }
+              />
+              {errors.name && (
+                <p style={{ color: "red", marginTop: "5px" }}>
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
+
+
+            <div>
+              <label htmlFor="dob" style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px",}}>
+                DOB
+              </label>
+              <DatePicker
+                selected={date}
+                onChange={handleDateChange}
+                dateFormat="yyyy" //
+                minDate={new Date(1995, 0, 1)} // Jan 1, 1995
+                maxDate={new Date(2005, 0, 1)} // Jan 1, 2005
+                placeholderText="Select year"
+                customInput={<CustomInput />}
+              />
+            </div>
+
+
+            <div>
+              <label htmlFor="username" style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px"}}>
                 User Name
               </label>
 
               <input
                 type="text"
                 id="username"
+                placeholder="Enter Your User Name"
                 {...register("username", {
                   required: "Name is Required",
                   pattern: {
@@ -113,34 +242,6 @@ export default function UserForm() {
               {errors.username && (
                 <p style={{ color: "red", marginTop: "5px" }}>
                   {errors.username.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label
-                htmlFor="email"
-                style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px",}}
-              >
-                Email
-              </label>
-              <input
-                type="text"
-                id="email"
-                {...register("email", {
-                  required: "Name is Required",
-                })}
-                style={{ border: "1px solid rgba(255,255,255,0.2)", width: "100%", padding: "12px 15px", borderRadius: "12px", fontSize: "16px", outline: "none", background: "rgba(255,255,255,0.1)", color: "#000", boxShadow: "0 4px 15px rgba(0,0,0,0.3)", transition: "all 0.3s ease"}}
-                onFocus={(e) =>
-                  (e.target.style.border = "1px solid rgba(0,255,255,0.6)")
-                }
-                onBlur={(e) =>
-                  (e.target.style.border = "1px solid rgba(255,255,255,0.2)")
-                }
-              />
-              {errors.name && (
-                <p style={{ color: "red", marginTop: "5px" }}>
-                  {errors.name.message}
                 </p>
               )}
             </div>
@@ -185,7 +286,7 @@ export default function UserForm() {
 
             <div>
               <label
-                htmlFor="role"
+                htmlFor="department"
                 style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px"}}
               >
                 Select Department
@@ -219,40 +320,7 @@ export default function UserForm() {
               />
             </div>
 
-
-            <div>
-              <label
-                htmlFor="phone_no"
-                style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px",}}
-              >
-                Mobile Number
-              </label>
-              <input
-                type="text"
-                id="phone_no"
-                {...register("phone_no", {
-                  required: "Name is Required",
-                  pattern:{
-                    value:/^[0-9]+$/,
-                    message:"Phone Number Must be Number"
-                  }
-                })}
-                style={{ border: "1px solid rgba(255,255,255,0.2)", width: "100%", padding: "12px 15px", borderRadius: "12px", fontSize: "16px", outline: "none", background: "rgba(255,255,255,0.1)", color: "#000", boxShadow: "0 4px 15px rgba(0,0,0,0.3)", transition: "all 0.3s ease"}}
-                onFocus={(e) =>
-                  (e.target.style.border = "1px solid rgba(0,255,255,0.6)")
-                }
-                onBlur={(e) =>
-                  (e.target.style.border = "1px solid rgba(255,255,255,0.2)")
-                }
-              />
-              {errors.name && (
-                <p style={{ color: "red", marginTop: "5px" }}>
-                  {errors.name.message}
-                </p>
-              )}
-            </div>
-
-            <div>
+            {/* <div>
                 <label htmlFor="document" style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px"}}
                 >Aadhar Document</label>
                 <div {...getRootProps()} style={{ border: "1px solid rgba(255,255,255,0.2)", width: "100%", padding: "20px", borderRadius: "12px", fontSize: "16px",  background: "rgba(255,255,255,0.1)", color: "#000", boxShadow: "0 4px 15px rgba(0,0,0,0.3)" }}>
@@ -260,7 +328,8 @@ export default function UserForm() {
                   <p style={{color:"#969292ff"}}>Drag & drop files here, or click to select</p>
                   <ul>{acceptedFiles.map(file => <li key={file.name}>{file.name}</li>)}</ul>
                 </div>
-            </div>
+            </div> */}
+
           </div>
 
           <div

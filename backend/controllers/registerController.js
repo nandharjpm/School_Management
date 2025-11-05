@@ -7,10 +7,17 @@ import User  from '../models/Users.js';
 export const registerUser = async (req, res) => {
   try {
     console.log("registerUser() called with body:", req.body); 
+    
     const verificationToken = crypto.randomBytes(32).toString('hex');
     
-    const { email, username, password, mobile } = req.body;
-    if (!email || !username || !password || !mobile) {
+    const { name, email, username, password, mobile, role, department } = req.body;
+
+    const user_password = password ? password : username + '@12345';
+    console.log(user_password);
+    
+    const final_password = user_password;
+
+    if (!email || !username || !mobile) {
       req.flash('error', 'Please enter all fields');
       return res.status(400).json({ message: "Please Enter All Fields" });
     }
@@ -34,12 +41,16 @@ export const registerUser = async (req, res) => {
     }
 
     
-    const hashPassword = await bcrypt.hash(password, 10);
+    const hashPassword = await bcrypt.hash(final_password, 10);
+
     const createusers = new User({
+      name,
       email,
       username,
       password: hashPassword,
       mobile,
+      role,
+      department,
       verificationToken
     });
     await createusers.save();

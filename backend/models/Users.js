@@ -4,13 +4,11 @@ import mongoose from "mongoose";
 const UserSchema = new mongoose.Schema({
   name: { type: String, required: false },
   email: { type: String, required: true },
+  mobile: { type: Number, required: true },
   role: { type: Number, required: false }, // 1-> admin -> 2
-  user_type: { type: Number, required: false },
   username: { type: String, required: true },
   password: { type: String, required: true },
   department: {type: Number, required:false},
-  class_section: { type: String, required: false },
-  mobile: { type: Number, required: true },
   theme: { type: Boolean, required: false },
   status: { type: Boolean, enum: [1, 0], default: 1, required: true },
   trash: { type: String, enum: ["YES", "NO"], default: "NO", required: true },
@@ -21,5 +19,5 @@ const UserSchema = new mongoose.Schema({
   timestamps: true,
 });
 // isLogin, isVerified, status
-const User = mongoose.model("Register", UserSchema);
+const User = mongoose.model("User", UserSchema);
 export default User;
