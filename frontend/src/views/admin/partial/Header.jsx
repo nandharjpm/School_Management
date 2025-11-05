@@ -14,13 +14,13 @@ export default function Header() {
               <button onClick={()=>navigate("/")} className="cursor-pointer">Home</button>
             </li>
             <li className="text-xl font-semibold tracking-wide text-gray-200 hover:text-white hover:scale-110 transition duration-300 ease-in-out cursor-pointer">
-              Program
+              <button onClick={()=>navigate("/program")} className="cursor-pointer">Program</button>
             </li>
             <li className="text-xl font-semibold tracking-wide text-gray-200 hover:text-white hover:scale-110 transition duration-300 ease-in-out cursor-pointer">
-              Innovations
+              <button onClick={()=>navigate("/innovations")} className="cursor-pointer">Innovations</button>
             </li>
             <li className="text-xl font-semibold tracking-wide text-gray-200 hover:text-white hover:scale-110 transition duration-300 ease-in-out cursor-pointer">
-              Campus Life
+              <button onClick={()=>navigate("/campus-life")} className="cursor-pointer">Campus Life</button>
             </li>
           </div>
 

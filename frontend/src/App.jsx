@@ -1,11 +1,8 @@
 import HomePage from "./views/component/HomePage";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  Outlet,
-} from "react-router-dom";
+import Program from "./views/component/Program";
+import Campuslife from "./views/component/Campuslife";
+import Innovations from "./views/component/innovations";
+import { BrowserRouter, Routes, Route, Navigate, Outlet} from "react-router-dom";
 import Login from "./views/auth/Login";
 import Register from "./views/auth/Register";
 import Confirmation from "./views/auth/Confirmation";
@@ -15,7 +12,6 @@ import AdminDashboard from "./views/component/AdminDashboard";
 import UserForm from "./views/component/UserForm";
 import ProtectedRouter from "./views/component/ProtectedRouter";
 import { UserProvider } from "./context/UserContext";
-import LeftMenu from "./views/admin/admin_panel/LeftMenu";
 import Location_list from "./views/component/master/location/Location_list";
 import Location_add from "./views/component/master/location/Location_add";
 import LocationView from "./views/component/master/location/LocationView";
@@ -40,6 +36,9 @@ export default function App() {
           <ToastContainer position="top-right" autoClose={3000} />
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/program" element={<Program />} />
+            <Route path="/innovations" element={<Innovations />} />
+            <Route path="/campus-life" element={<Campuslife />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/confirmation" element={<Confirmation />} />
