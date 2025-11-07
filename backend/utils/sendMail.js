@@ -27,8 +27,6 @@ export const sendMail = async (to, subject, content, fromTitle = "NK College Man
         chatCompletion?.choices?.[0]?.message?.content ||
         chatCompletion?.generated_text ||
         "<p>Welcome to NK College Management!</p>";
-
-      console.log("AI Generated Email:", finalContent);
     }
 
     const transporter = nodemailer.createTransport({
@@ -45,7 +43,6 @@ export const sendMail = async (to, subject, content, fromTitle = "NK College Man
       subject,
       html: finalContent,
     });
-
     console.log(`Email sent successfully to ${to}`);
   } catch (err) {
     console.error("Error sending email:", err.message);

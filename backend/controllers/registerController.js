@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import crypto from 'crypto';
 import {sendMail} from "../utils/sendMail.js";
-import User  from '../models/Users.js';
+import User from '../models/Users.js';
 
 
 export const registerUser = async (req, res) => {
@@ -13,7 +13,6 @@ export const registerUser = async (req, res) => {
     const { name, email, username, password, mobile, role, department } = req.body;
 
     const user_password = password ? password : username + '@12345';
-    console.log(user_password);
     
     const final_password = user_password;
 
@@ -23,6 +22,8 @@ export const registerUser = async (req, res) => {
     }
 
     const existingEmail = await User.findOne({ email });
+    console.log(existingEmail);
+    
     if (existingEmail) {
       req.flash('error', 'Email is already exist');
       return res.status(400).json({ message: "Email is already exist" });

@@ -9,7 +9,7 @@ import Confirmation from "./views/auth/Confirmation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminDashboard from "./views/component/AdminDashboard";
-import UserForm from "./views/component/UserForm";
+// import UserForm from "./views/component/UserForm";
 import ProtectedRouter from "./views/component/ProtectedRouter";
 import { UserProvider } from "./context/UserContext";
 import Location_list from "./views/component/master/location/Location_list";
@@ -26,6 +26,11 @@ import BuildingList from "./views/component/master/building/BuildingList";
 import BuildingAdd from "./views/component/master/building/BuildingAdd";
 import BuildingEdit from "./views/component/master/building/BuildingEdit";
 import BuildingView from "./views/component/master/building/BuildingView";
+
+import StaffList from "./views/component/master/staff/StaffList";
+// import StaffAdd from "./views/component/master/staff/StaffAdd";
+// import StaffEdit from "./views/component/master/staff/StaffEdit";
+// import StaffView from "./views/component/master/staff/StaffView";
 
 
 export default function App() {
@@ -44,14 +49,14 @@ export default function App() {
             <Route path="/confirmation" element={<Confirmation />} />
             <Route path="*" element={<h1>Page Not Found</h1>} />
             <Route
-              path="/userform"
+              path="/adminDashboard"
               element={
                 <ProtectedRouter>
-                  <UserForm />
                   <AdminDashboard />
                 </ProtectedRouter>
               }
             />
+            
             <Route path="location" element={<ProtectedRouter>  <Outlet /></ProtectedRouter>}
             >
               <Route index element={<Navigate to="list" replace />} />
@@ -76,6 +81,15 @@ export default function App() {
               <Route path="view/:id" element={<BuildingView />} />
               <Route path="edit/:id" element={<BuildingEdit />} />
             </Route>
+
+            <Route path="staff" element={<ProtectedRouter> <Outlet /> </ProtectedRouter>} >
+              <Route index element={<Navigate to="list" replace />} />
+              <Route path="list" element={<StaffList />} />
+              {/* <Route path="add" element={<StaffAdd />} />
+              <Route path="view/:id" element={<StaffView />} />
+              <Route path="edit/:id" element={<StaffEdit />} /> */}
+            </Route>
+
           </Routes>
         </UserProvider>
       </BrowserRouter>

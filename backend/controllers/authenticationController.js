@@ -14,6 +14,8 @@ export const authenticationController = async(req, res) => {
         }
         
         const getUsername = await User.findOne({username});
+        console.log(getUsername);
+        
         if(!getUsername){
             return res.status(400).json({message:"User Not Found"});
         }

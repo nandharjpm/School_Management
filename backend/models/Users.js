@@ -18,6 +18,6 @@ const UserSchema = new mongoose.Schema({
 }, {
   timestamps: true,
 });
-// isLogin, isVerified, status
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model("Users", UserSchema);
+
 export default User;
