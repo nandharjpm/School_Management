@@ -3,36 +3,26 @@ import Header from "../../../admin/admin_panel/Header";
 import LeftMenu from "../../../admin/admin_panel/LeftMenu";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Backbutton from "../../../../utils/components/Backbutton";
 import Submitbutton from "../../../../utils/components/Submitbutton";
 import Select from "react-select";
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from "dayjs";
 
-export default function StaffAdd() {
-  const { control, register, handleSubmit, formState: { errors }} = useForm();
+export default function DepartmentEdit() {
+  const { control, register, handleSubmit, formState: { errors }, setValue} = useForm();
   const navigate = useNavigate();
   const [locations, setLocation] = useState([]);
   const [college, setCollege] = useState([]);
+  const [department, setDepartment] = useState([]);
+  const {id} = useParams();
   const api = import.meta.env.VITE_API_URL;
 
-//   const department = {
-//     [value="1", label="B.E Mechanical Engineering"]
-//     [value="2", label="B.E Civil Engineering"]
-//     [value="3", label="B.E Chemical Engineering"]
-//     [value="4", label="B.Tech Information Technology"]
-//     [value="5", label="B.E Computer Science Engineering"]
-//   };
-
-  
 
   useEffect(() => {
     fetchLocation();
+    fetchDepartment();
+
   }, []);
 
   const fetchLocation = async () => {
@@ -43,7 +33,7 @@ export default function StaffAdd() {
     } catch (err) {
       console.log(err);
     }
-  };
+  }
 
   const fetchCollege = async (locationId) => {
     try{
@@ -59,20 +49,43 @@ export default function StaffAdd() {
         console.log(err);
     }
   }
+  
+  
+  const fetchDepartment = async () => {
+    try {
+      const res = await axios.get(`${api}/edit-department/${id}`);      
+      
+      const data = res.data.editDepartment;
+      setDepartment(data.department);
+
+      setValue('department', data.department);
+      setValue('location', data.location_id);
+      setValue('college', data.college_id);
+
+      fetchCollege(data.location_id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
   const onSubmit = async (data) => {
     try {
-      const result = await axios.post(`${api}/building-submit`, data);
+      const payload = { _id:id, department:data.department, location:data.location, college:data.college};
+      
+      
+      const result = await axios.post(`${api}/department-edit-submit`, payload);
       if (result.status === 201) {
-        toast.success("Building is Created");
+        toast.success("Department is Updated");
       }
     } catch (err) {
       toast.error("Something went Wrong");
       console.log(err);
     }
-    navigate("/staff/list");
+    navigate("/department/list");
   };
 
+  
 
   return (
     <div style={{ display: "flex", minHeight: "100vh", fontFamily: "'Poppins', sans-serif", color: "#fff"}}>
@@ -80,39 +93,29 @@ export default function StaffAdd() {
       <LeftMenu />
       <div style={{ marginTop: 120, marginLeft: 100, boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)", padding: 40, height: "90%", width: "70%", borderRadius: "20px"}}>
         <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: "5px"}}>
-          <Backbutton onClick={() => navigate("/staff/list")} />
+          <Backbutton onClick={() => navigate("/department/list")} />
         </div>
 
-        <p className="text-center text-2xl"
-          style={{ backgroundColor: "#cfcfcfff", padding: "8px", marginBottom: "8px", borderRadius: "5px", color: "#000", fontWeight: "600"}}
-        >
-          Staff Add
+        <p className="text-center text-2xl" style={{ backgroundColor: "#cfcfcfff", padding: "8px", marginBottom: "8px", borderRadius: "5px", color: "#000", fontWeight: "600"}}>
+          Building Edit
         </p>
 
         <form onSubmit={handleSubmit(onSubmit)} style={{ marginTop: "30px" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "40px", alignItems: "start"}}>
             <div>
-              <label
-                htmlFor="location"
-                style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px"}}
-              >
+              <label htmlFor="location" style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px"}}>
                 Location
               </label>
 
                 <Controller
                   name="location"
                   control={control}
-                  defaultValue=""
                   rules={{ required: "Location is required" }}
                   render={({ field }) => (
                     <Select
                       {...field}
-                      options={locations.map((loc) => ({
-                        value: loc._id,
-                        label: loc.location,
-                      }))}
+                      options={locations.map((loc) => ({ value: loc._id, label: loc.location}))}
                       placeholder="Select Location"
-                      isClearable
                       onChange={(selectedOption) => {
                         const selectedValue = selectedOption ? selectedOption.value : '';
                         field.onChange(selectedValue);
@@ -228,22 +231,31 @@ export default function StaffAdd() {
 
             <div>
               <label
-                htmlFor="staff_name"
-                style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px"}}
+                htmlFor="department"
+                style={{
+                  display: "block",
+                  fontSize: "1.2rem",
+                  fontWeight: "500",
+                  color: "#000",
+                  marginBottom: "10px",
+                }}
               >
-                Staff Name
+                Department Name
               </label>
 
               <input
                 type="text"
-                id="staff_name"
-                {...register("staff_name", {
-                  required: "Staff Name is Required",
+                id={department}
+                defaultValue={''}
+                {...register("department", {
+                  required: "Department Name is Required",
                   pattern:{
-                    value:/^[A-Za-z\s]+$/,
+                    value:/^[A-Z.\s]+$/,
                     message:"Letters Only Allowed"
                   }
                 })}
+                onChange={(e) => setValue('department', e.target.value.toUpperCase())}
+                
                 style={{
                   border: "1px solid rgba(255,255,255,0.2)",
                   width: "100%",
@@ -263,44 +275,21 @@ export default function StaffAdd() {
                   (e.target.style.border = "1px solid rgba(255,255,255,0.2)")
                 }
               />
-              {errors.staff_name && (
+              {errors.department && (
                 <p style={{ color: "red", marginTop: "5px" }}>
-                  {errors.staff_name.message}
+                  {errors.department.message}
                 </p>
               )}
             </div>
-
-            <div>
-
-                <Controller 
-                    name="dob"
-                    control={control}
-                    rules={{required:"Date of Birth is Required"}}
-                    render={({field})=>(
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
-                            {...field}
-                            label="Date of Birth"
-                            value={field.value || null}
-                            minDate={dayjs().subtract(90, "year")}
-                            maxDate={dayjs().subtract(25,"year")}
-                            onChange={(newValue)=>field.onChange(newValue)}
-                            sx={{ width: "100%" }}
-                        />
-                        </LocalizationProvider>
-                    )}
-                />
-                {errors.dob && (
-                    <p style={{ color: "red", marginTop: "5px" }}>
-                        {errors.dob.message}
-                    </p>
-                )}
-            </div>
-
-
           </div>
 
-          <div style={{ marginTop: "40px", display: "flex", justifyContent: "end"}}>
+          <div
+            style={{
+              marginTop: "40px",
+              display: "flex",
+              justifyContent: "end",
+            }}
+          >
             <Submitbutton />
           </div>
         </form>

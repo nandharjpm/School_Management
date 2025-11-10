@@ -58,12 +58,21 @@ export default function LeftMenu() {
             >
               Building
             </MenuItem>
+
+            <MenuItem
+              icon={<FaBuilding />}
+              onClick={() => navigate("/department")}
+              active={location.pathname === "/department"}
+            >
+              Department
+            </MenuItem>
           </SubMenu>
+
           <SubMenu icon={<FaUser />} label="User Master">
               <MenuItem
                 icon={<FaUserTie />}
-                onClick={() => navigate("/satff")}
-                active={location.pathname === "/satff"}
+                onClick={() => navigate("/staff")}
+                active={location.pathname === "/staff"}
               >
                 Staff
               </MenuItem>

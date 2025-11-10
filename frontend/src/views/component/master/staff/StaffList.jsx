@@ -4,7 +4,7 @@ import LeftMenu from "../../../admin/admin_panel/LeftMenu";
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {AddLocationbutton} from "../../../../utils/components/Addbutton";
+import {AddStaffbutton} from "../../../../utils/components/Addbutton";
 import {FaEdit, FaEye, FaTrash} from "react-icons/fa";
 import Swal from "sweetalert2";
 
@@ -18,8 +18,8 @@ export default function StaffList() {
   }, []);
 
   const fetchStaffList = async () => {
-    const res = await axios.get(`${api}/location`);
-    const data = res.data.locationData;
+    const res = await axios.get(`${api}/staff`);
+    const data = res.data.staffData;
     setStaffList(data);
   };
 
@@ -111,12 +111,12 @@ export default function StaffList() {
       <div style={{ marginTop: 120, height:"20%", marginLeft: 70, width: "75%", padding: 40, borderRadius: "20px", background: "rgba(243, 243, 243, 0.25)", boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)"}}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px"}}>
           <h2 style={{ color: "#000000ff", fontWeight: 600 }}>Staff Details</h2>
-          <AddLocationbutton onClick={()=>navigate("/location/add")}/>
+          <AddStaffbutton onClick={()=>navigate("/staff/add")}/>
         </div>
 
         <DataTable
           columns={columns}
-          data={location}
+          data={staffList}
           pagination
           highlightOnHover
           customStyles={customStyles}

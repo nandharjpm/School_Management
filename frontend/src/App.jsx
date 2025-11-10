@@ -27,8 +27,13 @@ import BuildingAdd from "./views/component/master/building/BuildingAdd";
 import BuildingEdit from "./views/component/master/building/BuildingEdit";
 import BuildingView from "./views/component/master/building/BuildingView";
 
+import DepartmentList from "./views/component/master/department/DepartmentList";
+import DepartmentAdd from "./views/component/master/department/DepartmentAdd";
+import DepartmentEdit from "./views/component/master/department/DepartmentEdit";
+import DepartmentView from "./views/component/master/department/DepartmentView";
+
 import StaffList from "./views/component/master/staff/StaffList";
-// import StaffAdd from "./views/component/master/staff/StaffAdd";
+import StaffAdd from "./views/component/master/staff/StaffAdd";
 // import StaffEdit from "./views/component/master/staff/StaffEdit";
 // import StaffView from "./views/component/master/staff/StaffView";
 
@@ -82,11 +87,19 @@ export default function App() {
               <Route path="edit/:id" element={<BuildingEdit />} />
             </Route>
 
+            <Route path="department" element={<ProtectedRouter> <Outlet /> </ProtectedRouter>} >
+              <Route index element={<Navigate to="list" replace />} />
+              <Route path="list" element={<DepartmentList />} />
+              <Route path="add" element={<DepartmentAdd />} />
+              <Route path="view/:id" element={<DepartmentView />} />
+              <Route path="edit/:id" element={<DepartmentEdit />} />
+            </Route>
+
             <Route path="staff" element={<ProtectedRouter> <Outlet /> </ProtectedRouter>} >
               <Route index element={<Navigate to="list" replace />} />
               <Route path="list" element={<StaffList />} />
-              {/* <Route path="add" element={<StaffAdd />} />
-              <Route path="view/:id" element={<StaffView />} />
+              <Route path="add" element={<StaffAdd />} />
+              {/* <Route path="view/:id" element={<StaffView />} />
               <Route path="edit/:id" element={<StaffEdit />} /> */}
             </Route>
 

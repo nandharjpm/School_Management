@@ -5,6 +5,7 @@ import {authenticationController} from '../controllers/authenticationController.
 import {locationMasterController} from '../controllers/master/locationMasterController.js'
 import { collegeMasterController } from '../controllers/master/collegeMasterController.js';
 import {buildingMasterController} from '../controllers/master/buildingMasterController.js'
+import {departmentMasterController} from '../controllers/master/departmentMasterController.js'
 
 const router = express.Router();
 
@@ -28,6 +29,15 @@ router.post('/college-edit-submit', collegeMasterController.updateCollege);
 router.post('/delete-college/:id', collegeMasterController.deleteCollege);
 router.get('/get-college/:id', collegeMasterController.viewCollege);
 router.post('/college/location_id/:id', collegeMasterController.locBasedCollege);
+
+// department Master
+router.get('/department', departmentMasterController.getDepartment);
+router.post('/department-submit', departmentMasterController.storeDepartment);
+router.get('/edit-department/:id', departmentMasterController.getDepartmentEdit);
+router.post('/department-edit-submit', departmentMasterController.updateDepartment);
+router.post('/delete-department/:id', departmentMasterController.deleteDepartment);
+router.get('/get-department/:id', departmentMasterController.viewDepartment);
+router.post('/department/location_id/:id', departmentMasterController.locBasedCollege);
 
 // building master
 router.get('/building', buildingMasterController.getBuilding);

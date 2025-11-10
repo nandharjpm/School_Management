@@ -16,7 +16,6 @@
     "filepond": "^4.32.10",
     "react": "^19.1.1",
     "react-data-table-component": "^7.7.0",
-    "react-datepicker": "^8.8.0",
     "react-dom": "^19.1.1",
     "react-dropzone": "^14.3.8",
     "react-filepond": "^7.1.3",
@@ -27,7 +26,12 @@
     "react-select": "^5.10.2",
     "react-toastify": "^11.0.5",
     "sweetalert2": "^11.26.3",
-    "tailwindcss": "^4.1.13"
+    "tailwindcss": "^4.1.13",
+    "@mui/x-date-pickers": "latest",
+    "dayjs": "1.11.18",
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/material": "latest"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",

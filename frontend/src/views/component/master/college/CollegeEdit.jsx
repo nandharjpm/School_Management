@@ -171,7 +171,6 @@ export default function CollegeEdit() {
               <input
                 type="text"
                 id="college"
-                defaultValue={''}
                 {...register("college", {
                   required: "College Name is Required",
                   pattern: {
