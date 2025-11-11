@@ -169,6 +169,20 @@ const getStaffUser = async (req,res) =>{
 
 }
 
+const editStaffUser = async (req, res) => {
+  try{
+    const userData = await User.findById(req.params.id);
+    return res.status(200).json({userData});
+  }catch(err){
+    return res.status(500).json({err});
+  }
+
+}
+
+const updateStaffUser = async (req, res) => {
+
+}
+
 export const registerUser = {
-  SubmitUser, getStaffUser, storeStaffUser
+  SubmitUser, getStaffUser, storeStaffUser, editStaffUser, updateStaffUser
 };
