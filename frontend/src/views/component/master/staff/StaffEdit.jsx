@@ -72,12 +72,20 @@ export default function StaffEdit() {
     const staffData = await axios.get(`${api}/staff-edit/${id}`);
     const data = staffData.data.userData;
     
-    
     setValue("staff_name", data.name);
     setValue("username", data.username);
     setValue("mobile", data.mobile);
     setValue('location', data.location_id);
+    setValue('email', data.email);
+    setValue('user_role', data.role);
+    setValue('dob', data.dob);
+
+    await fetchCollege(data.location_id)
     setValue('college', data.college_id);
+
+    await DepartmentList(data.college_id)
+    setValue('department', data.department_id);
+
 
 
     
@@ -146,6 +154,7 @@ export default function StaffEdit() {
                         const selectedValue = selectedOption ? selectedOption.value : '';
                         field.onChange(selectedValue);
                         fetchCollege(selectedValue)
+                        setValue('location', selectedValue);
                       }}
                       value={
                         locations
@@ -200,9 +209,7 @@ export default function StaffEdit() {
                 render={({ field }) => (
                   <Select
                     {...field}
-                    options={college?.map((col) => ({
-                      value: col._id,
-                      label: col.college,
+                    options={college?.map((col) => ({ value: col._id, label: col.college,
                     })) || []}
                     placeholder="Select College"
                     isClearable
@@ -582,11 +589,11 @@ export default function StaffEdit() {
               )}
             />
 
-    {errors.user_role && (
-    <p style={{ color: "red", marginTop: "5px" }}>
-      {errors.user_role.message}
-    </p>
-    )}
+              {errors.user_role && (
+              <p style={{ color: "red", marginTop: "5px" }}>
+                {errors.user_role.message}
+              </p>
+              )}
             </div>
 
 
