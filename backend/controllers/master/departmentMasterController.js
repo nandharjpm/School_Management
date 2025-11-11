@@ -39,7 +39,6 @@ const storeDepartment = async (req, res) => {
 const getDepartmentEdit = async (req, res) => {
   try {
     const editDepartment = await Department.findById(req.params.id);
-    console.log(editDepartment);
     if (!editDepartment) {
       return res.status(404).json({ message: "Department No Found" });
     }
@@ -52,7 +51,6 @@ const getDepartmentEdit = async (req, res) => {
 const updateDepartment = async (req, res) => {
   try {
       const { _id, location, college, department } = req.body;
-      console.log("details : ", req.body);
 
     if (!location) {
       return res.status(400).json({ message: "Location is Required" });
@@ -97,16 +95,18 @@ const viewDepartment = async (req, res) => {
   }
 };
 
-const locBasedCollege = async(req,res) => {
+const colBasedDepartment = async(req,res) => {
   try{
-    const locationId = req.params.id;
-    const getCollege = await Department.find({location_id: locationId});    
-    console.log(getCollege);
+    console.log("req : ", req.params);
     
-    if(!getCollege){
+    const collegeId = req.params.id;
+    const getDepartment = await Department.find({ college_id: collegeId});
+    console.log("dep :",getDepartment);
+    
+    if(!getDepartment){
       return res.status(404).json({message:"College Not Found"});
     }
-    return res.status(200).json({getCollege});
+    return res.status(200).json({getDepartment});
   }catch(err){
     return res.status(500).json({message:err});
   }
@@ -119,5 +119,5 @@ export const departmentMasterController = {
   updateDepartment,
   deleteDepartment,
   viewDepartment,
-  locBasedCollege
+  colBasedDepartment
 };

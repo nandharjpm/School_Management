@@ -9,9 +9,12 @@ import {departmentMasterController} from '../controllers/master/departmentMaster
 
 const router = express.Router();
 
-router.post('/register', registerUser);
+router.post('/register', registerUser.SubmitUser);
 router.get('/verify-email', emailVerification);
 router.post('/login', authenticationController);
+// user master
+router.get('/staff', registerUser.getStaffUser);
+router.post('/staff-submit', registerUser.storeStaffUser);
 
 // location Master
 router.get('/location', locationMasterController.getLocation);
@@ -37,7 +40,7 @@ router.get('/edit-department/:id', departmentMasterController.getDepartmentEdit)
 router.post('/department-edit-submit', departmentMasterController.updateDepartment);
 router.post('/delete-department/:id', departmentMasterController.deleteDepartment);
 router.get('/get-department/:id', departmentMasterController.viewDepartment);
-router.post('/department/location_id/:id', departmentMasterController.locBasedCollege);
+router.post('/department/clg_id/:id', departmentMasterController.colBasedDepartment);
 
 // building master
 router.get('/building', buildingMasterController.getBuilding);
@@ -46,6 +49,8 @@ router.get('/edit-building/:id', buildingMasterController.getBuildingEdit);
 router.post('/building-edit-submit', buildingMasterController.updateBuilding);
 router.post('/delete-building/:id', buildingMasterController.deleteBuilding);
 router.get('/get-building/:id', buildingMasterController.viewBuilding);
+
+
 
 
 export default router;

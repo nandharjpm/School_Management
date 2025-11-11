@@ -8,7 +8,10 @@ const UserSchema = new mongoose.Schema({
   role: { type: Number, required: false }, // 1-> admin -> 2
   username: { type: String, required: true },
   password: { type: String, required: true },
-  department: {type: Number, required:false},
+  location_id:{type:String, required:false},
+  college_id:{type:String, required:false},
+  department_id: {type: String, required:false},
+  dob: {type: String, required:false},
   theme: { type: Boolean, required: false },
   status: { type: Boolean, enum: [1, 0], default: 1, required: true },
   trash: { type: String, enum: ["YES", "NO"], default: "NO", required: true },
@@ -18,6 +21,6 @@ const UserSchema = new mongoose.Schema({
 }, {
   timestamps: true,
 });
-const User = mongoose.model("Users", UserSchema);
+const Users= mongoose.model("users", UserSchema);
 
-export default User;
+export default Users;

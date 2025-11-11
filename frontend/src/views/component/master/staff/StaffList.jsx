@@ -7,6 +7,7 @@ import axios from "axios";
 import {AddStaffbutton} from "../../../../utils/components/Addbutton";
 import {FaEdit, FaEye, FaTrash} from "react-icons/fa";
 import Swal from "sweetalert2";
+import {getDepartmentNameById, getCollegeNamebyId, getRole} from "../../../../utils/helpers/Helper";
 
 export default function StaffList() {
   const [staffList, setStaffList] = useState([]);
@@ -17,10 +18,22 @@ export default function StaffList() {
     fetchStaffList();
   }, []);
 
+
+
   const fetchStaffList = async () => {
     const res = await axios.get(`${api}/staff`);
     const data = res.data.staffData;
-    setStaffList(data);
+    
+
+    const staffData = await Promise.all(
+      data.map(async(item)=>{
+        const college_name = await getCollegeNamebyId(item.college_id);
+        const department_name = await getDepartmentNameById(item.department_id);
+        const user_role = await getRole(item.role)
+        return {...item, collegeName: college_name, departName:department_name, userRole:user_role}
+      })
+    )
+    setStaffList(staffData);
   };
 
   const deleteStaff = async(id)=>{
@@ -43,7 +56,10 @@ export default function StaffList() {
 
   const columns = [
     {name: "S.NO",selector: (row, index) => (index + 1),sortable: true,},
-    {name: "Staff", selector: (row) => row.staff, sortable: true },
+    {name: "Staff Name", selector: (row) => row.name, sortable: true },
+    {name: "College Name", selector: (row) => row.collegeName, sortable: true },
+    {name: "Department", selector: (row) => row.departName, sortable: true },
+    {name: "Role", selector: (row) => row.userRole, sortable: true },
     {name:"Action",
       cell:(row)=>(
         <div style={{display:"flex", gap:"15px"}}>
