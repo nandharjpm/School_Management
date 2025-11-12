@@ -3,6 +3,7 @@ let api = import.meta.env.VITE_API_URL;
 
 export async function getLocationNamebyId(id) {
   try {
+    
     const res = await axios.get(`${api}/get-location/${id}`);    
     return res.data.locationView.location;
   } catch (err) {

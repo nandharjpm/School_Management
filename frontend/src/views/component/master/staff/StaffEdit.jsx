@@ -94,7 +94,6 @@ export default function StaffEdit() {
       const payload = {
         _id:id, staff_name:data.staff_name, username:data.username, mobile:data.mobile, location:data.location, email:data.email, dob:data.dob, user_role:data.user_role, college:data.college, department:data.department
       }
-      console.log("payload",payload);
       
       const result = await axios.post(`${api}/staff-update/${id}`, payload);
       toast.success("Staff is Updated");

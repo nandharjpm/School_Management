@@ -35,7 +35,7 @@ import DepartmentView from "./views/component/master/department/DepartmentView";
 import StaffList from "./views/component/master/staff/StaffList";
 import StaffAdd from "./views/component/master/staff/StaffAdd";
 import StaffEdit from "./views/component/master/staff/StaffEdit";
-// import StaffView from "./views/component/master/staff/StaffView";
+import StaffView from "./views/component/master/staff/StaffView";
 
 
 export default function App() {
@@ -99,7 +99,7 @@ export default function App() {
               <Route index element={<Navigate to="list" replace />} />
               <Route path="list" element={<StaffList />} />
               <Route path="add" element={<StaffAdd />} />
-              {/* <Route path="view/:id" element={<StaffView />} */}
+              <Route path="view/:id" element={<StaffView />} />
               <Route path="edit/:id" element={<StaffEdit />} />
             </Route>
 
