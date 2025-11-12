@@ -208,6 +208,16 @@ const updateStaffUser = async (req, res) => {
   }
 }
 
+const deleteStaffUser = async (req, res) => {
+  try{
+    const {id} = req.params;
+    await User.delete({_id: id});
+    res.status(200).json({message:"Staff Deleted Successfully"});
+  }catch(err){
+      res.status(500).json({message:err.message});
+  }
+}
+
 export const registerUser = {
-  SubmitUser, getStaffUser, storeStaffUser, editStaffUser, updateStaffUser
+  SubmitUser, getStaffUser, storeStaffUser, editStaffUser, updateStaffUser, deleteStaffUser
 };

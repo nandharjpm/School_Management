@@ -16,6 +16,7 @@ router.post('/login', authenticationController);
 router.get('/staff', registerUser.getStaffUser);
 router.post('/staff-submit', registerUser.storeStaffUser);
 router.get('/staff-edit/:id', registerUser.editStaffUser);
+router.post('/delete-staff/:id', registerUser.deleteStaffUser);
 router.post('/staff-update/:id', registerUser.updateStaffUser);
 
 // location Master

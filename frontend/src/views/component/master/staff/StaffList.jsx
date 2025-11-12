@@ -87,7 +87,7 @@ export default function StaffList() {
           />
           <FaTrash 
             title="Delete"
-            onClick={()=> deleteLoc(row._id)}
+            onClick={()=> deleteStaff(row._id)}
             style={{
               color:"#ff0000ff",
               fontSize:"18px",

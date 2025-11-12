@@ -73,7 +73,6 @@ const UpdateLocation = async(req, res) => {
 const DeleteLocation =  async(req, res) => {
     try{
         const {id} = req.params;
-        console.log("Deleting id:", id);
         await Location.delete({_id: id});
         res.status(200).json({message:"Location Deleted Successfully"});
     }catch(err){
