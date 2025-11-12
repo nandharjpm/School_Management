@@ -38,7 +38,6 @@ const storeCollege = async (req, res) => {
 const getCollegeEdit = async (req, res) => {
   try {
     const editCollege = await College.findById(req.params.id);
-    console.log(editCollege);
     if (!editCollege) {
       return res.status(404).json({ message: "College No Found" });
     }
@@ -50,7 +49,6 @@ const getCollegeEdit = async (req, res) => {
 
 const updateCollege = async (req, res) => {
   try {
-    console.log(req.body);
     const { _id, location, college } = req.body;
 
     if (!location) {
@@ -96,7 +94,6 @@ const locBasedCollege = async(req,res) => {
   try{
     const locationId = req.params.id;
     const getCollege = await College.find({location_id: locationId});    
-    console.log(getCollege);
     
     if(!getCollege){
       return res.status(404).json({message:"College Not Found"});

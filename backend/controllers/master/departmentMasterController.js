@@ -97,11 +97,8 @@ const viewDepartment = async (req, res) => {
 
 const colBasedDepartment = async(req,res) => {
   try{
-    console.log("req : ", req.params);
-    
     const collegeId = req.params.id;
     const getDepartment = await Department.find({ college_id: collegeId});
-    console.log("dep :",getDepartment);
     
     if(!getDepartment){
       return res.status(404).json({message:"College Not Found"});

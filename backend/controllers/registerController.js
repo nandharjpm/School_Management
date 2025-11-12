@@ -6,8 +6,6 @@ import User from '../models/Users.js';
 
 const SubmitUser = async (req, res) => {
   try {
-    console.log("registerUser() called with body:", req.body); 
-    
     const verificationToken = crypto.randomBytes(32).toString('hex');
     
     const { name, email, username, password, mobile, role, department } = req.body;
@@ -22,7 +20,6 @@ const SubmitUser = async (req, res) => {
     }
 
     const existingEmail = await User.findOne({ email });
-    console.log(existingEmail);
     
     if (existingEmail) {
       req.flash('error', 'Email is already exist');
@@ -66,7 +63,6 @@ const SubmitUser = async (req, res) => {
        <p>Click the link below to verify your account:</p>
        <a href="${verificationUrl}">Verify its You</a>`
     );
-    console.log("previous email is called");
 
     await sendMail(
       email,
@@ -75,7 +71,6 @@ const SubmitUser = async (req, res) => {
       "NK College Management",
       username
     );
-    console.log("Ai Mail Called")
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: err.message });
@@ -87,7 +82,6 @@ const storeStaffUser = async (req, res) => {
   try {    
     const verificationToken = crypto.randomBytes(32).toString('hex');
     const { staff_name, email, username, password, mobile, user_role, department, location, college, dob } = req.body;
-    console.log(req.body);
     
     
 
@@ -128,6 +122,7 @@ const storeStaffUser = async (req, res) => {
       location_id:location,
       college_id:college,
       department_id:department,
+      dob,
       verificationToken
     });
     await createusers.save();
@@ -180,7 +175,37 @@ const editStaffUser = async (req, res) => {
 }
 
 const updateStaffUser = async (req, res) => {
+  try {    
+    const {_id, staff_name, email, username, password, mobile, user_role, department, location, college, dob } = req.body;
+    
+    const user_password = password ? password : username + '@12345';
+    
+    const final_password = user_password;
 
+    if (!email || !staff_name || !mobile || !user_role || !department || !username || !location || !college || !dob) {
+      return res.status(400).json({ message: "Please Enter All Fields" });
+    }
+
+    const hashPassword = await bcrypt.hash(final_password, 10);
+
+    await User.findByIdAndUpdate(_id, {
+      name: staff_name,
+      email,
+      username,
+      password: hashPassword,
+      mobile,
+      role: user_role,
+      location_id: location,
+      college_id: college,
+      department_id: department,
+      dob,
+    });
+
+    return res.status(200).json({message:"User Updated Successfully"});
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: err.message });
+  }
 }
 
 export const registerUser = {

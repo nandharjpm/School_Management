@@ -77,8 +77,9 @@ export default function StaffEdit() {
     setValue("mobile", data.mobile);
     setValue('location', data.location_id);
     setValue('email', data.email);
-    setValue('user_role', data.role);
-    setValue('dob', data.dob);
+    
+    setValue('dob', data.dob ? dayjs(data.dob) : null);
+    setValue('user_role', String(data.role));
 
     await fetchCollege(data.location_id)
     setValue('college', data.college_id);
@@ -86,17 +87,17 @@ export default function StaffEdit() {
     await DepartmentList(data.college_id)
     setValue('department', data.department_id);
 
-
-
-    
   }
 
   const onSubmit = async (data) => {
     try {
-      const result = await axios.post(`${api}/staff-update`, data);
-      if (result.status === 201) {
-        toast.success("Staff is Updated");
+      const payload = {
+        _id:id, staff_name:data.staff_name, username:data.username, mobile:data.mobile, location:data.location, email:data.email, dob:data.dob, user_role:data.user_role, college:data.college, department:data.department
       }
+      console.log("payload",payload);
+      
+      const result = await axios.post(`${api}/staff-update/${id}`, payload);
+      toast.success("Staff is Updated");
     } catch (err) {
       toast.error("Something went Wrong");
       console.log(err);

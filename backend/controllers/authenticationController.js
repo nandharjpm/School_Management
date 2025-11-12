@@ -6,7 +6,6 @@ import jwt from "jsonwebtoken";
 export const authenticationController = async(req, res) => {
     try{
         const {username, password} = req.body;
-        console.log("Login attempt:", req.body);
         
         if(!username || !password){
             req.flash('error', 'Username or Password is Missing');
@@ -24,7 +23,6 @@ export const authenticationController = async(req, res) => {
             return res.status(403).json({message:"Verify Your Account First"});
         }
 
-        console.log("Password from DB:", getUsername.password);
         const isValid = await bcrypt.compare(password, getUsername.password);
         if(!isValid){
             req.flash('error', 'Invalid User Name or Password');
