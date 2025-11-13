@@ -37,11 +37,15 @@ import StaffAdd from "./views/component/master/staff/StaffAdd";
 import StaffEdit from "./views/component/master/staff/StaffEdit";
 import StaffView from "./views/component/master/staff/StaffView";
 
-
 import StudentList from "./views/component/master/student/StudentList";
 import StudentAdd from "./views/component/master/student/StudentAdd";
 import StudentEdit from "./views/component/master/student/StudentEdit";
 import StudentView from "./views/component/master/student/StudentView";
+
+import CourseList from "./views/component/academics/course/CourseList";
+import CourseAdd from "./views/component/academics/course/CourseAdd";
+// import CourseEdit from "./views/component/academics/course/CourseEdit";
+// import CourseView from "./views/component/academics/course/CourseView";
 
 
 export default function App() {
@@ -102,7 +106,6 @@ export default function App() {
               <Route path="edit/:id" element={<StaffEdit />} />
             </Route>
 
-
             <Route path="student" element={<ProtectedRouter> <Outlet /> </ProtectedRouter>} >
               <Route index element={<Navigate to="list" replace />} />
               <Route path="list" element={<StudentList />} />
@@ -110,6 +113,16 @@ export default function App() {
               <Route path="view/:id" element={<StudentView />} />
               <Route path="edit/:id" element={<StudentEdit />} />
             </Route>
+
+
+            <Route path="course" element={<ProtectedRouter> <Outlet /> </ProtectedRouter>} >
+              <Route index element={<Navigate to="list" replace />} />
+              <Route path="list" element={<CourseList />} />
+              <Route path="add" element={<CourseAdd />} />
+              {/* <Route path="view/:id" element={<CourseView />} /> */}
+              {/* <Route path="edit/:id" element={<CourseEdit />} /> */}
+            </Route>
+
 
           </Routes>
         </UserProvider>

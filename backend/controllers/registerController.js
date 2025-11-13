@@ -226,6 +226,7 @@ const getStudentUser = async (req,res) =>{
     const role =[5];
     const studentData = await User.find({role:{$in:role}});
     
+    
     return res.status(200).json({studentData});
   }catch(err){
     return res.status(500).json({message: err.message});

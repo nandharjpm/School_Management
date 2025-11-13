@@ -6,6 +6,7 @@ import {locationMasterController} from '../controllers/master/locationMasterCont
 import { collegeMasterController } from '../controllers/master/collegeMasterController.js';
 import {buildingMasterController} from '../controllers/master/buildingMasterController.js'
 import {departmentMasterController} from '../controllers/master/departmentMasterController.js'
+import {courseMasterController} from '../controllers/academic/course/courseMasterController.js'
 
 const router = express.Router();
 
@@ -59,7 +60,12 @@ router.post('/building-edit-submit', buildingMasterController.updateBuilding);
 router.post('/delete-building/:id', buildingMasterController.deleteBuilding);
 router.get('/get-building/:id', buildingMasterController.viewBuilding);
 
-
+router.get('/course', courseMasterController.getCourse);
+router.post('/course-submit', courseMasterController.storeCourse);
+router.get('/edit-course/:id', courseMasterController.getCourseEdit);
+router.post('/course-edit-submit', courseMasterController.updateCourse);
+router.post('/delete-course/:id', courseMasterController.deleteCourse);
+router.get('/get-course/:id', courseMasterController.viewCourse);
 
 
 export default router;

@@ -26,6 +26,8 @@ const storeLocation = async (req, res) => {
 const getLocation = async(req, res)=>{
     try{
         const locationData = await Location.find();
+        console.log(locationData);
+        
         res.status(200).json({locationData});
     }catch(err){
         console.error(err);
