@@ -38,6 +38,12 @@ import StaffEdit from "./views/component/master/staff/StaffEdit";
 import StaffView from "./views/component/master/staff/StaffView";
 
 
+import StudentList from "./views/component/master/student/StudentList";
+import StudentAdd from "./views/component/master/student/StudentAdd";
+import StudentEdit from "./views/component/master/student/StudentEdit";
+import StudentView from "./views/component/master/student/StudentView";
+
+
 export default function App() {
   return (
     <div>
@@ -53,14 +59,7 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/confirmation" element={<Confirmation />} />
             <Route path="*" element={<h1>Page Not Found</h1>} />
-            <Route
-              path="/adminDashboard"
-              element={
-                <ProtectedRouter>
-                  <AdminDashboard />
-                </ProtectedRouter>
-              }
-            />
+            <Route path="/adminDashboard" element={ <ProtectedRouter> <AdminDashboard /> </ProtectedRouter>}/>
             
             <Route path="location" element={<ProtectedRouter>  <Outlet /></ProtectedRouter>}
             >
@@ -101,6 +100,15 @@ export default function App() {
               <Route path="add" element={<StaffAdd />} />
               <Route path="view/:id" element={<StaffView />} />
               <Route path="edit/:id" element={<StaffEdit />} />
+            </Route>
+
+
+            <Route path="student" element={<ProtectedRouter> <Outlet /> </ProtectedRouter>} >
+              <Route index element={<Navigate to="list" replace />} />
+              <Route path="list" element={<StudentList />} />
+              <Route path="add" element={<StudentAdd />} />
+              <Route path="view/:id" element={<StudentView />} />
+              <Route path="edit/:id" element={<StudentEdit />} />
             </Route>
 
           </Routes>

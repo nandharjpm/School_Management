@@ -12,12 +12,18 @@ const router = express.Router();
 router.post('/register', registerUser.SubmitUser);
 router.get('/verify-email', emailVerification);
 router.post('/login', authenticationController);
-// user master
+// user master for staff
 router.get('/staff', registerUser.getStaffUser);
 router.post('/staff-submit', registerUser.storeStaffUser);
 router.get('/staff-edit/:id', registerUser.editStaffUser);
 router.post('/delete-staff/:id', registerUser.deleteStaffUser);
 router.post('/staff-update/:id', registerUser.updateStaffUser);
+// user master for student
+router.get('/student', registerUser.getStudentUser);
+router.post('/student-submit', registerUser.storeStudentUser);
+router.get('/student-edit/:id', registerUser.editStudentUser);
+router.post('/delete-student/:id', registerUser.deleteStudentUser);
+router.post('/student-update/:id', registerUser.updateStudentUser);
 
 // location Master
 router.get('/location', locationMasterController.getLocation);

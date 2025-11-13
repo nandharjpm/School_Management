@@ -78,8 +78,8 @@ export default function LeftMenu() {
               </MenuItem>
               <MenuItem
                 icon={<FaUserGraduate />}
-                onClick={() => navigate("/students")}
-                active={location.pathname === "/students"}
+                onClick={() => navigate("/student")}
+                active={location.pathname === "/student"}
               >
                 Students
               </MenuItem>
