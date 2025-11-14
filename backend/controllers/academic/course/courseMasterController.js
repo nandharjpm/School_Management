@@ -41,11 +41,11 @@ const storeCourse = async (req, res) => {
 
 const getCourseEdit = async (req, res) => {
   try {
-    const editBuilding = await Course.findById(req.params.id);
-    if (!editBuilding) {
+    const editCourse = await Course.findById(req.params.id);    
+    if (!editCourse) {
       return res.status(404).json({ message: "Course No Found" });
     }
-    return res.status(200).json({ editBuilding });
+    return res.status(200).json({ editCourse });
   } catch (err) {
     return res.status(500).json({ message: err });
   }

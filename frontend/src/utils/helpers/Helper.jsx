@@ -46,3 +46,19 @@ export async function getRole(id){
     console.log(err);
   }
 }
+
+export async function getYear(id){
+  try{
+    const year = [
+      {value:1, label:"I - Year"},
+      {value:2, label:"II - Year"},
+      {value:3, label:"III - Year"},
+      {value:4, label:"IV - Year"},
+    ];
+
+    const data = year.find(item=>item.value == id);
+    return data ? data.label : '';
+  }catch(err){
+    console.log(err);
+  }
+}
