@@ -43,46 +43,22 @@ export default function CourseView() {
 
   return (
     <div
-      style={{
-        display: "flex",
-        minHeight: "100vh",
-        fontFamily: "'Poppins', sans-serif",
-        color: "#fff",
-      }}
+      style={{ display: "flex", minHeight: "100vh", fontFamily: "'Poppins', sans-serif", color: "#fff"}}
     >
       <Header />
       <LeftMenu />
       <div
-        style={{
-          marginTop: 120,
-          marginLeft: 100,
-          boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)",
-          padding: 40,
-          height: "90%",
-          width: "70%",
-          borderRadius: "20px",
-        }}
+        style={{ marginTop: 120, marginLeft: 100, boxShadow: "0 5px 18px 0 rgba(0, 0, 0, 0.37)", padding: 40, height: "90%", width: "70%", borderRadius: "20px"}}
       >
         <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-start",
-            marginBottom: "5px",
-          }}
+          style={{ display: "flex", justifyContent: "flex-start", marginBottom: "5px"}}
         >
           <Backbutton onClick={() => navigate("/course/list")} />
         </div>
 
         <p
           className="text-center text-2xl"
-          style={{
-            backgroundColor: "#cfcfcfff",
-            padding: "8px",
-            marginBottom: "8px",
-            borderRadius: "5px",
-            color: "#000",
-            fontWeight: "600",
-          }}
+          style={{ backgroundColor: "#cfcfcfff", padding: "8px", marginBottom: "8px", borderRadius: "5px", color: "#000", fontWeight: "600"}}
         >
           Course View
         </p>
@@ -94,13 +70,7 @@ export default function CourseView() {
             <div>
               <label
                 htmlFor="location"
-                style={{
-                  display: "block",
-                  fontSize: "1.2rem",
-                  fontWeight: "500",
-                  color: "#000",
-                  marginBottom: "10px",
-                }}
+                style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px"}}
               >
                 Location
               </label>
@@ -114,13 +84,7 @@ export default function CourseView() {
             <div>
               <label
                 htmlFor="college"
-                style={{
-                  display: "block",
-                  fontSize: "1.2rem",
-                  fontWeight: "500",
-                  color: "#000",
-                  marginBottom: "10px",
-                }}
+                style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px"}}
               >
                 College
               </label>
@@ -135,13 +99,7 @@ export default function CourseView() {
             <div>
               <label
                 htmlFor="department"
-                style={{
-                  display: "block",
-                  fontSize: "1.2rem",
-                  fontWeight: "500",
-                  color: "#000",
-                  marginBottom: "10px",
-                }}
+                style={{ display: "block", fontSize: "1.2rem", fontWeight: "500", color: "#000", marginBottom: "10px"}}
               >
                 Department
               </label>
