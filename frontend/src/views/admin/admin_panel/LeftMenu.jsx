@@ -101,13 +101,6 @@ export default function LeftMenu() {
             </MenuItem>
             <MenuItem
               icon={<FaUserGraduate />}
-              onClick={() => navigate("/sub_staff")}
-              active={location.pathname === "/sub_staff"}
-            >
-              Subject Mentors
-            </MenuItem>
-            <MenuItem
-              icon={<FaUserGraduate />}
               onClick={() => navigate("/timetable")}
               active={location.pathname === "/timetable"}
             >
