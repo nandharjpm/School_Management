@@ -25,9 +25,7 @@ const storeLocation = async (req, res) => {
 
 const getLocation = async(req, res)=>{
     try{
-        const locationData = await Location.find();
-        console.log(locationData);
-        
+        const locationData = await Location.find();        
         res.status(200).json({locationData});
     }catch(err){
         console.error(err);
@@ -63,7 +61,6 @@ const getLocationEdit = async(req,res) => {
 
 const UpdateLocation = async(req, res) => {
     try{
-        console.log(req.body);
         const {id, location} = req.body;
         await Location.findByIdAndUpdate(id, {location});
         res.status(201).json({message:"Location Updated Successfully"});

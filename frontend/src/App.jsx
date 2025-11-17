@@ -45,7 +45,7 @@ import StudentView from "./views/component/master/student/StudentView";
 import CourseList from "./views/component/academics/course/CourseList";
 import CourseAdd from "./views/component/academics/course/CourseAdd";
 import CourseView from "./views/component/academics/course/CourseView";
-// import CourseEdit from "./views/component/academics/course/CourseEdit";
+import CourseEdit from "./views/component/academics/course/CourseEdit";
 
 
 export default function App() {
@@ -120,7 +120,7 @@ export default function App() {
               <Route path="list" element={<CourseList />} />
               <Route path="add" element={<CourseAdd />} />
               <Route path="view/:id" element={<CourseView />} />
-              {/* <Route path="edit/:id" element={<CourseEdit />} /> */}
+              <Route path="edit/:id" element={<CourseEdit />} />
             </Route>
 
 

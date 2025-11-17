@@ -13,6 +13,11 @@ const storeCourse = async (req, res) => {
   try {    
     const { college, location, department, courses, year } = req.body;
     
+    const existData = await Course.findOne({college,location,department,year})
+
+    if(existData){
+      return res.status(400).json({ message: "Data is alredy Exist, Please use the Edit Options" });
+    }
 
     if (!location) {
       return res.status(400).json({ message: "Location is Required" });
@@ -53,8 +58,9 @@ const getCourseEdit = async (req, res) => {
 
 const updateCourse = async (req, res) => {
   try {
+    console.log(req.body);
     
-    const { _id, location, college, building } = req.body;
+    const { _id, location, college, department, year, courses } = req.body;
 
     if (!location) {
       return res.status(400).json({ message: "Location is Required" });
@@ -62,8 +68,17 @@ const updateCourse = async (req, res) => {
     if (!college) {
       return res.status(400).json({ message: "Course is Required" });
     }
+    if (!department) {
+      return res.status(400).json({ message: "Department is Required" });
+    }
+    if (!year) {
+      return res.status(400).json({ message: "Year is Required" });
+    }
+    if (!courses) {
+      return res.status(400).json({ message: "Courses are Required" });
+    }
 
-    await Course.findByIdAndUpdate(_id, { location_id: location, college_id: college, building});
+    await Course.findByIdAndUpdate(_id, { location_id: location, college_id:college, department_id:department, year, course:courses});
     return res.status(201).json({ message: "Course is Updated Successfully" });
   } catch (err) {
     return res.status(500).json({ err });

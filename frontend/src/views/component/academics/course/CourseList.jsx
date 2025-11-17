@@ -23,8 +23,6 @@ export default function CourseList() {
     const res = await axios.get(`${api}/course`);
     const data = res.data.courseData;
     
-    
-
     const courseData = await Promise.all(
       data.map(async(item)=>{
         const college_name = await getCollegeNamebyId(item.college_id);
@@ -32,7 +30,8 @@ export default function CourseList() {
         const user_role = await getRole(item.role)
         return {...item, collegeName: college_name, departName:department_name, userRole:user_role}
       })
-    )
+    );
+    
     setCourseList(courseData);
   };
 
