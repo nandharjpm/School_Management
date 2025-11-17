@@ -7,6 +7,7 @@ import { collegeMasterController } from '../controllers/master/collegeMasterCont
 import {buildingMasterController} from '../controllers/master/buildingMasterController.js'
 import {departmentMasterController} from '../controllers/master/departmentMasterController.js'
 import {courseMasterController} from '../controllers/academic/course/courseMasterController.js'
+import {digitalLibraryController} from '../controllers/academic/course/digitalLibraryController.js'
 
 const router = express.Router();
 
@@ -66,6 +67,8 @@ router.get('/edit-course/:id', courseMasterController.getCourseEdit);
 router.post('/course-edit-submit', courseMasterController.updateCourse);
 router.post('/delete-course/:id', courseMasterController.deleteCourse);
 router.get('/get-course/:id', courseMasterController.viewCourse);
+
+router.post('/books/search?query=', digitalLibraryController);
 
 
 export default router;

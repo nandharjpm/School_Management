@@ -47,6 +47,8 @@ import CourseAdd from "./views/component/academics/course/CourseAdd";
 import CourseView from "./views/component/academics/course/CourseView";
 import CourseEdit from "./views/component/academics/course/CourseEdit";
 
+import Library from "./views/component/academics/library/Library";
+
 
 export default function App() {
   return (
@@ -121,6 +123,12 @@ export default function App() {
               <Route path="add" element={<CourseAdd />} />
               <Route path="view/:id" element={<CourseView />} />
               <Route path="edit/:id" element={<CourseEdit />} />
+            </Route>
+
+
+            <Route path="library" element={<ProtectedRouter> <Outlet /> </ProtectedRouter>} >
+              <Route index element={<Navigate to="search-page" replace />} />
+              <Route path="search-page" element={<Library />} />
             </Route>
 
 
