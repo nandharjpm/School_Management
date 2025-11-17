@@ -7,7 +7,7 @@ import axios from "axios";
 import {AddCoursebutton} from "../../../../utils/components/Addbutton";
 import {FaEdit, FaEye, FaTrash} from "react-icons/fa";
 import Swal from "sweetalert2";
-import {getDepartmentNameById, getCollegeNamebyId, getRole} from "../../../../utils/helpers/Helper";
+import {getDepartmentNameById, getCollegeNamebyId, getRole, getYear} from "../../../../utils/helpers/Helper";
 
 export default function CourseList() {
   const [CourseList, setCourseList] = useState([]);
@@ -22,13 +22,15 @@ export default function CourseList() {
   const fetchCourseList = async () => {
     const res = await axios.get(`${api}/course`);
     const data = res.data.courseData;
+    console.log(data);
     
     const courseData = await Promise.all(
       data.map(async(item)=>{
         const college_name = await getCollegeNamebyId(item.college_id);
         const department_name = await getDepartmentNameById(item.department_id);
         const user_role = await getRole(item.role)
-        return {...item, collegeName: college_name, departName:department_name, userRole:user_role}
+        const year = await getYear(item.year)
+        return {...item, collegeName: college_name, departName:department_name, userRole:user_role, year:year}
       })
     );
     
@@ -57,6 +59,7 @@ export default function CourseList() {
     {name: "S.NO",selector: (row, index) => (index + 1),sortable: true,},
     {name: "College", selector: (row) => row.collegeName, sortable: true },
     {name: "Department", selector: (row) => row.departName, sortable: true },
+    {name: "Year", selector: (row) => row.year, sortable: true },
     {name:"Action",
       cell:(row)=>(
         <div style={{display:"flex", gap:"15px"}}>
