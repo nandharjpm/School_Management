@@ -14,12 +14,8 @@ export default async function digitalLibraryController(req, res){
         
         
 
-        // if(books.length == 0){
-        //     return res.status(404).json({message:"No Books Found"})
-        // }
-
         const client = new InferenceClient(process.env.HUGGINGFACE_API_KEY);
-        const prompt = `summarize the given topic of ${query} content explain very simple a person can easily understand and show the content user firendly Interface and just provide the content dont make any unnecessary data like 'of course or user friendly summary and so on'`;
+        const prompt = `summarize the given book about ${query} which can easily understand and show the content user firendly Interface and just provide the content of given book dont use * or # -- like that`;
 
         const chatCompletion = await client.chatCompletion({
         model: "zai-org/GLM-4.6",
