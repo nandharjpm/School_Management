@@ -99,26 +99,6 @@ export default function LeftMenu() {
             >
               Course/Programs
             </MenuItem>
-          </SubMenu>
-
-          <SubMenu icon={<PiExamFill />} label="Examination">
-            <MenuItem
-              icon={<FaUserGraduate />}
-              onClick={() => navigate("/student")}
-              active={location.pathname === "/student"}
-            >
-              Exam Result
-            </MenuItem>
-          </SubMenu>
-
-          <SubMenu icon={<FaBookReader />} label="Academic Records">
-            <MenuItem
-              icon={<FaUserTie />}
-              onClick={() => navigate("/staff")}
-              active={location.pathname === "/staff"}
-            >
-              Assignment
-            </MenuItem>
             <MenuItem
               icon={<FaUserGraduate />}
               onClick={() => navigate("/library")}
@@ -131,10 +111,10 @@ export default function LeftMenu() {
           <SubMenu icon={<FaNewspaper />} label="News">
             <MenuItem
               icon={<FaUserTie />}
-              onClick={() => navigate("/staff")}
-              active={location.pathname === "/staff"}
+              onClick={() => navigate("/noticeboard")}
+              active={location.pathname === "/noticeboard"}
             >
-              Notice Board/Annoncements
+              Notice Board
             </MenuItem>
             <MenuItem
               icon={<FaUserGraduate />}

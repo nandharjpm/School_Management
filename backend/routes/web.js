@@ -8,6 +8,8 @@ import {buildingMasterController} from '../controllers/master/buildingMasterCont
 import {departmentMasterController} from '../controllers/master/departmentMasterController.js'
 import {courseMasterController} from '../controllers/academic/course/courseMasterController.js'
 import digitalLibraryController from '../controllers/academic/course/digitalLibraryController.js'
+import {noticeboardController} from '../controllers/news/noticeboardController.js'
+
 
 const router = express.Router();
 
@@ -69,6 +71,8 @@ router.post('/delete-course/:id', courseMasterController.deleteCourse);
 router.get('/get-course/:id', courseMasterController.viewCourse);
 
 router.get('/books/search', digitalLibraryController);
+
+router.post('/noticeboard-submit', noticeboardController.storeAnouncement)
 
 
 export default router;
