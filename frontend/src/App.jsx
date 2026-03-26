@@ -49,8 +49,8 @@ import CourseEdit from "./views/component/academics/course/CourseEdit";
 
 import Library from "./views/component/academics/library/Library";
 
-import NoticeBoard from "./views/component/news/NoticeBoard";
-import NoticeBoardAdd from "./views/component/news/NoticeBoardAdd";
+// import NoticeBoard from "./views/component/news/NoticeBoard";
+// import NoticeBoardAdd from "./views/component/news/NoticeBoardAdd";
 
 
 
@@ -135,11 +135,11 @@ export default function App() {
               <Route path="search-page" element={<Library />} />
             </Route>
 
-            <Route path="noticeboard" element={<ProtectedRouter> <Outlet /> </ProtectedRouter>} >
+            {/* <Route path="noticeboard" element={<ProtectedRouter> <Outlet /> </ProtectedRouter>} >
               <Route index element={<Navigate to="noticeboard" replace />} />
               <Route path="noticeboard" element={<NoticeBoard />} />
               <Route path="add" element={<NoticeBoardAdd />} />
-            </Route>
+            </Route> */}
 
 
           </Routes>

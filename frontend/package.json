@@ -10,10 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/material": "latest",
+    "@mui/x-date-pickers": "latest",
     "@tailwindcss/vite": "^4.1.13",
     "axios": "^1.12.2",
     "date-fns": "^4.1.0",
+    "dayjs": "1.11.18",
     "filepond": "^4.32.10",
+    "highcharts": "^12.5.0",
+    "highcharts-react-official": "^3.2.3",
     "react": "^19.1.1",
     "react-data-table-component": "^7.7.0",
     "react-dom": "^19.1.1",
@@ -25,13 +32,9 @@
     "react-router-dom": "^7.9.1",
     "react-select": "^5.10.2",
     "react-toastify": "^11.0.5",
+    "recharts": "^3.8.1",
     "sweetalert2": "^11.26.3",
-    "tailwindcss": "^4.1.13",
-    "@mui/x-date-pickers": "latest",
-    "dayjs": "1.11.18",
-    "@emotion/react": "latest",
-    "@emotion/styled": "latest",
-    "@mui/material": "latest"
+    "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",

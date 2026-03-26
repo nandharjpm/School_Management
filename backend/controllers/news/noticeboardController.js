@@ -1,4 +1,4 @@
-import Anouncement from '../../models/news/Anouncement'
+// import Anouncement from '../../models/news/Anouncement'
 
 const storeAnouncement = async (req, res) => {
     try{
